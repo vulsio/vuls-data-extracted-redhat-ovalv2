@@ -1,0 +1,1971 @@
+{
+	"id": "RHSA-2018:0369",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2018:0369",
+				"title": "RHSA-2018:0369: openstack-nova and python-novaclient security, bug fix, and enhancement update (Moderate)",
+				"description": "OpenStack Compute (nova) launches and schedules large networks of virtual machines, creating a redundant and scalable cloud computing platform. Compute provides the software, control panels, and APIs required to orchestrate a cloud, including running virtual machine instances and controlling access through users and projects.\n\npython-novaclient is the python client for the OpenStack Nova API. The client's Python API (the novaclient module) and command-line script (nova) both implement 100% of the OpenStack Nova API.\n\nThe following packages have been upgraded to a later upstream version: openstack-nova (14.1.0), python-novaclient (6.0.2). (BZ#1501736)\n\nSecurity Fix(es):\n\n* By rebuilding an instance using a new image, an authenticated user may be able to circumvent the Filter Scheduler, bypassing imposed filters (for example, the ImagePropertiesFilter or the IsolatedHostsFilter). (CVE-2017-16239)\n\nRed Hat would like to thank the OpenStack project for reporting this issue. Upstream acknowledges George Shuklin (Servers.com) as the original reporter.\n\nBug Fix(es):\n\n* Prior to this update, QEMU (also known as TCG) guests had an issue where the `guest.get_vcpu_info` method was throwing an exception indicating that 0 were vCPUs used on the host, regardless of how many guests were running. Consequently, this caused the 'get_available_resources' method to report incorrect vCPUs used values for the Compute node. This meant it was overcounting resource consumption for plain QEMU guests, as they can only ever consume 1 pCPU of time, regardless of vCPU count. With this update, if a host does not report detailed vCPU usage from libvirt, then it should default to reporting 1 vCPU per guest, so that the 'vcpus_used' field reports some reasonably meaningful data on host CPU usage. As a result, libvirt does not report that 'cpu affinity is not supported' when guests are running in TCG. (BZ#1515165)\n\n* With this enhancement, the act of evacuating instances with pinned CPUs can result in these instances being hosted on a hypervisor which already handles instances with the same pinning configuration. This was added because the resource tracker does not track CPU pinning for instances on hosts. As a result, a condition has been added to the NUMATopologyFilter filter, which passes on hosts which already manage an instance with same CPU pinning configuration as the instance being evacuated. (BZ#1517272)\n\n* Previously, the `request_spec.spec` column's TEXT type was too small, with the result that large request_specs may not have fit successfully. Consequently, running the online data migration as part of an OSP9 to OSP10 upgrade could have resulted in failure if an instance created before the upgrade had a large request_spec (for example, by having many members in its affinity/anti-affinity group). With this update, the request_spec.spec column has been increased to `MEDIUMTEXT`. As a result, online data migration should no longer fail during a OSP9 to OSP10 upgrade. (BZ#1526082)\n\n* Previously, when detaching a Ceph volume connected to guest as a PCI device, the volume was not detached and libvirt reported an invalid PCI address. This arose because the PCI address of the device was not properly formatted due to a missing method in the guest XML formatter. To address this issue, this update adds a proper `format_dom` method for `LibvirtConfigGuestDeviceAddressPCI`. As a result, it is now possible to detach a Ceph volume. (BZ#1527345)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2018:0369"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-16239"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1508539"
+					}
+				],
+				"published": "2018-02-27T00:00:00Z",
+				"modified": "2018-02-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-16239",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L",
+							"base_score": 5.4,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.4,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.4,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-841"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-16239"
+					}
+				]
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cells",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cert",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-common",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-compute",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-conductor",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-console",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-migration",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-network",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-novncproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-placement-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-scheduler",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-serialproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-spicehtml5proxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-novaclient",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:6.0.2-2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:6.0.2-2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cells",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cert",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-common",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-compute",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-conductor",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-console",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-migration",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-network",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-novncproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-placement-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-scheduler",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-serialproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-spicehtml5proxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:14.1.0-3.el7ost"
+													}
+												],
+												"fixed": [
+													"1:14.1.0-3.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-novaclient",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:6.0.2-2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:6.0.2-2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/definitions/oval:com.redhat.rhsa:def:20180369.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20159543017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171595001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543020.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543022.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20159543034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171595002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369033.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/definitions/oval:com.redhat.rhsa:def:20180369.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171242018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171595001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242020.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242022.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171242036.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171595002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369033.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180369035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025004.json"
+		]
+	}
+}

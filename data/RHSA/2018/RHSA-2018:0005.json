@@ -1,0 +1,713 @@
+{
+	"id": "RHSA-2018:0005",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2018:0005",
+				"title": "RHSA-2018:0005: eap7-jboss-ec2-eap security update (Important)",
+				"description": "The eap7-jboss-ec2-eap packages provide scripts for Red Hat JBoss Enterprise Application Platform running on the Amazon Web Services (AWS) Elastic Compute Cloud (EC2).\n\nWith this update, the eap7-jboss-ec2-eap package has been updated to ensure compatibility with Red Hat JBoss Enterprise Application Platform 7.0.9.\n\nRefer to the JBoss Enterprise Application Platform 7.0.9 Release Notes, linked to in the References section, for information on the most significant bug fixes and enhancements included in this release.\n\nSecurity Fix(es):\n\n* It was found that Apache Lucene would accept an object from an unauthenticated user that could be manipulated through subsequent post requests. An attacker could use this flaw to assemble an object that could permit execution of arbitrary code if the server enabled Apache Solr's Config API. (CVE-2017-12629)\n\n* It was discovered that the jboss init script performed unsafe file handling which could result in local privilege escalation. (CVE-2017-12189)\n\n* It was found that GZIPInterceptor is enabled when not necessarily required in RESTEasy. An attacker could use this flaw to launch a Denial of Service attack. (CVE-2016-6346)\n\n* It was found that the fix for CVE-2017-2666 was incomplete and invalid characters are still allowed in the query string and path parameters. This could be exploited, in conjunction with a proxy that also permitted the invalid characters but with a different interpretation, to inject data into the HTTP response. By manipulating the HTTP response the attacker could poison a web-cache, perform an XSS attack, or obtain sensitive information from requests other than their own. (CVE-2017-7559)\n\n* It was discovered that the CORS Filter did not add an HTTP Vary header indicating that the response varies depending on Origin. This permitted client and server side cache poisoning in some circumstances. (CVE-2017-7561)\n\n* It was found that properties based files of the management and the application realm configuration that contain user to role mapping are world readable allowing access to users and roles information to all the users logged in to the system. (CVE-2017-12167)\n\n* It was discovered that Undertow processes http request headers with unusual whitespaces which can cause possible http request smuggling. (CVE-2017-12165)\n\nRed Hat would like to thank Mikhail Egorov (Odin) for reporting CVE-2016-6346. The CVE-2017-7559 and CVE-2017-12165 issues were discovered by Stuart Douglas (Red Hat); the CVE-2017-7561 issue was discovered by Jason Shepherd (Red Hat Product Security); and the CVE-2017-12167 issue was discovered by Brian Stansberry (Red Hat) and Jeremy Choi (Red Hat).",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2018:0005"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6346"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12165"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12167"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12189"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12629"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7559"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7561"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1372120"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1481665"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1483823"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1490301"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1491612"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1499631"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1501529"
+					}
+				],
+				"published": "2018-01-03T00:00:00Z",
+				"modified": "2018-01-03T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2016-6346",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 7.5,
+							"base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6346"
+					}
+				],
+				"published": "2016-09-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-12165",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:N/I:L/A:N",
+							"base_score": 2.6,
+							"base_severity": "LOW",
+							"temporal_score": 2.6,
+							"temporal_severity": "LOW",
+							"environmental_score": 2.6,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-444"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12165"
+					}
+				],
+				"published": "2017-12-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-12167",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-732"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12167"
+					}
+				],
+				"published": "2017-09-14T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-12189",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7,
+							"base_severity": "HIGH",
+							"temporal_score": 7,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12189"
+					}
+				],
+				"published": "2018-01-03T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-12629",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:C/I:C/A:C",
+							"base_score": 10,
+							"nvd_base_severity": "HIGH",
+							"temporal_score": 10,
+							"nvd_temporal_severity": "HIGH",
+							"environmental_score": 10,
+							"nvd_environmental_severity": "HIGH"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 9.8,
+							"base_severity": "CRITICAL",
+							"temporal_score": 9.8,
+							"temporal_severity": "CRITICAL",
+							"environmental_score": 9.8,
+							"environmental_severity": "CRITICAL"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-138"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-12629"
+					}
+				],
+				"published": "2017-10-12T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-7559",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-444"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7559"
+					}
+				],
+				"published": "2017-12-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-7561",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-345"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7561"
+					}
+				],
+				"published": "2017-08-22T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-ec2-eap",
+												"repositories": [
+													"jb-eap-7.0-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-6-server-rpms",
+													"jb-eap-7.0-for-rhel-6-server-source-rpms",
+													"jb-eap-7.1-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-6-server-rpms",
+													"jb-eap-7.1-for-rhel-6-server-source-rpms",
+													"jb-eap-7.2-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-6-server-rpms",
+													"jb-eap-7.2-for-rhel-6-server-source-rpms",
+													"jb-eap-7.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-6-server-rpms",
+													"jb-eap-7.3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.9-2.GA_redhat_2.ep7.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.9-2.GA_redhat_2.ep7.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-ec2-eap-samples",
+												"repositories": [
+													"jb-eap-7.0-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-6-server-rpms",
+													"jb-eap-7.0-for-rhel-6-server-source-rpms",
+													"jb-eap-7.1-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-6-server-rpms",
+													"jb-eap-7.1-for-rhel-6-server-source-rpms",
+													"jb-eap-7.2-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-6-server-rpms",
+													"jb-eap-7.2-for-rhel-6-server-source-rpms",
+													"jb-eap-7.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-6-server-rpms",
+													"jb-eap-7.3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.9-2.GA_redhat_2.ep7.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.9-2.GA_redhat_2.ep7.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-ec2-eap",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.9-2.GA_redhat_2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:7.0.9-2.GA_redhat_2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-ec2-eap-samples",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.9-2.GA_redhat_2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:7.0.9-2.GA_redhat_2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/definitions/oval:com.redhat.rhsa:def:20180005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161840001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161840002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180005001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161840002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161840004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180005001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180005003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332004.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/definitions/oval:com.redhat.rhsa:def:20180005.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161840001.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161840002.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20180005001.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161840002.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161840004.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180005001.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20180005003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332004.json"
+		]
+	}
+}

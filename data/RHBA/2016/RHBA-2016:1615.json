@@ -1,0 +1,3136 @@
+{
+	"id": "RHBA-2016:1615",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHBA-2016:1615",
+				"title": "RHBA-2016:1615: Satellite 6.2.1 bug fix update (Moderate)",
+				"description": "Red Hat Satellite is a system management solution that allows organizations to configure and maintain their systems without the necessity to provide public Internet access to their servers or other client systems. It performs provisioning and configuration management of predefined standard operating environments.\n\nThis update fixes the following bugs:\n\n* Different virt-who instances were reporting UUIDs and host names which resulted in duplicate host names. A new virt-who has been delivered which allows users to standardize on a single virt-who instance. (BZ#1227986)\n\n* Failures in Puppet module upload were not being propagated to the command line. These failures are now reported correctly. (BZ#1234619)\n\n* A new hammer plug-in is now available which allows users to more easily enable and disable all logging on a Satellite Server. (BZ#1305085)\n\n* The katello-remove command was leaving behind artifacts which was inhibiting the re-installation of the Satellite. These artifacts are now removed, and customers can now re-install as expected. (BZ#1311313)\n\n* Navigating across plug-ins caused an error in the web UI. The navigation has been fixed. (BZ#1311739)\n\n* Certain API calls were allowing users to cross organization boundaries. These calls will now respect the organizational roles. (BZ#1342665)\n\n* Satellite 6.2 did not include the 'ovirt_provision_plugin' to connect with RHEV. This package is now included. (BZ#1343927)\n\n* Deleting a host did not clean up all the subscriptions associated with that host, which was blocking the delete. This subscription data is now cleaned up correctly. (BZ#1344053)\n\n* The installation process was failing to create keys if the /var/lib/puppet/ssl directory was deleted. The installer has been fixed to handle this case. (BZ#1347228)\n\n* Orchestration tasks which should only occur if provisioning was successful were being executed during a process which failed. The exception handling has been improved to not call these orchestration tasks if a provisioning process fails. (BZ#1347992)\n\n* Docker tags were not handled correctly when re-syncing from the Docker Repository. These tags are processed correctly now. (BZ#1349980)\n\n* When a repository sync process was started on the command line and when attempting to start another sync via the web UI, the request failed. With this update, checks are included for existing running sync processes. Duplicate requests no longer result in an error and the progress is correctly reported in the web UI. (BZ#1351103)\n\n* Satellite 6.2 was not calling NSS correctly for DNS updates. The correct number of parameters are now provided. (BZ#1359125)\n\n* Hammer was not requesting the organization ID parameter correctly with certain commands. (BZ#1359665)\n\n* Hammer did not allow users to specify a list of organizations to a host group. This feature has been added. (BZ#1359694)\n\n* The performance of upgrades has been improved on networked file systems. (BZ#1362135)\n\n* The Puppet reports page was not accessible due to an internal server error. The error is now handled correctly and the page can be viewed. (BZ#1364049)\n\nUsers of Red Hat Satellite are advised to upgrade to these updated packages, which fix these bugs.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHBA-2016:1615"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-4475"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1342439"
+					}
+				],
+				"published": "2016-08-16T00:00:00Z",
+				"modified": "2016-08-16T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "satellite-6.2"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "satellite-6.2"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2016-4475",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:S/C:P/I:P/A:N",
+							"base_score": 4.9,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.9,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.9,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-284"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-4475"
+					}
+				],
+				"published": "2016-06-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "satellite-6.2"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "satellite-6.2"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-compute",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-debug",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-ec2",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-gce",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-installer",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.11.0.10-1.el6sat"
+													}
+												],
+												"fixed": [
+													"1:1.11.0.10-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-libvirt",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-openstack",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-ovirt",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-postgresql",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-proxy",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.5-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.5-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-rackspace",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-vmware",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-admin-client",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-child",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-common",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-parent",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-selinux",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-server",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-agent-lib",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-bindings",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-client-lib",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-common",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-oid_validation",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-repoauth",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-streamer",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el6sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-capsule",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el6sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-cli",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el6sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-debug-tools",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el6sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-foreman_discovery",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0.9-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:5.0.0.9-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-hammer_cli_foreman_admin",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.5-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:0.0.5-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-hammer_cli_katello",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.22.25-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:0.0.22.25-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-katello",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.0.0.70-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:3.0.0.70-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-ovirt_provision_plugin",
+												"repositories": [
+													"rhel-6-server-satellite-6.1-debug-rpms",
+													"rhel-6-server-satellite-6.1-rpms",
+													"rhel-6-server-satellite-6.1-source-rpms",
+													"rhel-6-server-satellite-6.2-debug-rpms",
+													"rhel-6-server-satellite-6.2-rpms",
+													"rhel-6-server-satellite-6.2-source-rpms",
+													"rhel-6-server-satellite-capsule-6.1-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.1-rpms",
+													"rhel-6-server-satellite-capsule-6.1-source-rpms",
+													"rhel-6-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-6-server-satellite-capsule-6.2-rpms",
+													"rhel-6-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.2-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:1.0.2-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "satellite-6.2"
+				}
+			]
+		},
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-compute",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-debug",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-ec2",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-gce",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-installer",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.11.0.10-1.el7sat"
+													}
+												],
+												"fixed": [
+													"1:1.11.0.10-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-libvirt",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-openstack",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-ovirt",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-postgresql",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-proxy",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.5-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.5-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-rackspace",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "foreman-vmware",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.11.0.51-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.11.0.51-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-admin-client",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-child",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-common",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-nodes-parent",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-selinux",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pulp-server",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-agent-lib",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-bindings",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-client-lib",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-common",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-oid_validation",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-repoauth",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-pulp-streamer",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.8.3.4-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:2.8.3.4-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el7sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-capsule",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el7sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-cli",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el7sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-debug-tools",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.2.1-1.2.el7sat"
+													}
+												],
+												"fixed": [
+													"0:6.2.1-1.2.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-foreman_discovery",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0.9-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:5.0.0.9-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-hammer_cli_foreman_admin",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.5-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:0.0.5-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-hammer_cli_katello",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.22.25-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:0.0.22.25-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-katello",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.0.0.70-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:3.0.0.70-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-katello_ostree",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.0.0.70-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:3.0.0.70-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tfm-rubygem-ovirt_provision_plugin",
+												"repositories": [
+													"rhel-7-server-satellite-6.2-debug-rpms",
+													"rhel-7-server-satellite-6.2-rpms",
+													"rhel-7-server-satellite-6.2-source-rpms",
+													"rhel-7-server-satellite-capsule-6.2-debug-rpms",
+													"rhel-7-server-satellite-capsule-6.2-rpms",
+													"rhel-7-server-satellite-capsule-6.2-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.2-1.el7sat"
+													}
+												],
+												"fixed": [
+													"0:1.0.2-1.el7sat"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "satellite-6.2"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/definitions/oval:com.redhat.rhba:def:20161615.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501011.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501038.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501055.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501079.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501080.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501081.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501082.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501083.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501084.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501085.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501086.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501087.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501088.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501089.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501090.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501091.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501094.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501095.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501096.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501097.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501098.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501099.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501100.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501101.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501102.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501103.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501104.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501106.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501116.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501117.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501118.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501119.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501120.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161615018.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161615024.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161500126.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615001.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615003.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615004.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615005.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615006.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615008.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615009.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615010.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615011.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501022.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501076.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501110.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501158.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501160.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501162.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501164.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501166.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501168.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501170.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501172.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501174.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501176.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501178.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501180.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501182.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501188.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501190.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501192.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501194.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501196.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501198.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501200.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501202.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501204.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501206.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501208.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501212.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501232.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501234.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501236.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501238.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501240.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615001.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615003.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615005.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615007.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615009.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615011.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615013.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615015.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615017.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615019.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615021.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615023.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615025.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615027.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615029.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615031.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615033.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615035.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615036.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615037.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615039.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615041.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615043.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615045.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615047.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615048.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615049.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615051.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615053.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615055.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615057.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615059.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615061.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615063.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615065.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615067.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615069.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20161500345.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-6.2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20161500346.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/definitions/oval:com.redhat.rhba:def:20161615.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501011.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501033.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501053.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501059.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501060.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501061.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501062.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501063.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501064.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501065.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501066.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501067.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501068.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501069.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501070.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501071.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501094.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501095.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501096.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501097.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501098.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501099.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501100.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501101.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501102.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501103.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501104.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501105.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501112.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501113.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501114.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501115.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501116.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161501117.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161615014.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20161615032.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161501031.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615001.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615004.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615005.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615006.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615007.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615008.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615009.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615010.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/states/rpminfo_state/oval:com.redhat.rhba:ste:20161615011.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501022.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501066.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501106.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501118.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501120.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501122.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501124.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501126.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501128.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501130.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501132.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501134.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501136.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501138.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501140.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501142.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501188.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501190.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501192.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501194.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501196.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501198.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501200.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501202.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501204.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501206.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501208.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501210.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501224.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501226.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501228.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501230.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501232.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161501234.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615001.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615003.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615005.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615007.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615009.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615011.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615013.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615015.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615017.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615019.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615021.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615023.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615025.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615027.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615028.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615029.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615031.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615033.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615035.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615037.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615039.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615041.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615043.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615045.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615047.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615049.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615051.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615053.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615055.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615057.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615059.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615061.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615063.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615064.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615065.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615067.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615069.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20161615071.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20161500361.json",
+			"vuls-data-raw-redhat-ovalv2/7/satellite-6.2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20161500362.json"
+		]
+	}
+}

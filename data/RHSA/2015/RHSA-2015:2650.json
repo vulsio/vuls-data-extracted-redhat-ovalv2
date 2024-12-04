@@ -1,0 +1,438 @@
+{
+	"id": "RHSA-2015:2650",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2015:2650",
+				"title": "RHSA-2015:2650: Red Hat Enterprise Linux OpenStack Platform 7 director update (Moderate)",
+				"description": "Red Hat Enterprise Linux OpenStack Platform director provides the\nfacilities for deploying and monitoring a private or public\ninfrastructure-as-a-service (IaaS) cloud based on Red Hat Enterprise\nLinux OpenStack Platform.\n\nIt was discovered that the director's NeutronMetadataProxySharedSecret\nparameter remained specified at the default value of 'unset'. This value\nis used by OpenStack Networking to sign instance headers; if unchanged,\nan attacker knowing the shared secret could use this flaw to spoof\nOpenStack Networking metadata requests. (CVE-2015-5303)\n\nA flaw was found in the director (openstack-tripleo-heat-templates) where\nthe RabbitMQ credentials defaulted to guest/guest and supplied values in\nthe configuration were not used. As a result, all deployed overclouds used\nthe same credentials (guest/guest). A remote, non-authenticated attacker\ncould use this flaw to access RabbitMQ services in the deployed cloud.\n(CVE-2015-5329)\n\nThe CVE-2015-5303 issue was discovered by Steven Hardy of Red Hat.\nRed Hat would like to thank Kota Akatsuka of NEC for reporting the\nCVE-2015-5329 issue.\n\nAdditional bug fixes include:\n\n* Previously, hard-coded parameters were passed directly to Orchestration \n(heat). As a result, the parameters could not be overridden properly. With \nthis update, a custom environment file from the parameters collected is \ngenerated and pass as 'parameter_defaults', allowing parameters to be \noverridden.(BZ#1245737)\n\n* Previously, when scaling out Compute nodes in the Overcloud after\nan update was performed, the default UpdateIdentifier parameter in the\nOrchestration stack caused the new node to attempt an update \nas soon as it was coming up. Because the yum repositories were not \nconfigured on the new nodes yet, this caused the update to fail,\nwhich in turn caused the scale out to fail. With this update, the\nclient, python-rdomanager-oscplugin, does not clear the UpdateIdentifier\nparameter on subsequent stack-update attempts (including the scale out)\nuntil after the initial update has been completed. As a result, scale-out\nattempts after the update now succeed.(BZ#1290796)\n\n* Previously, the 'debug' parameter was enabled and hard-coded in the\novercloud deployment code, and the user could not disable debugging. \nWith this update, the 'debug' parameter has been removed from default \nhard-coded parameters in the overcloud deployment code. As a result, \nthe user can now control the debugging level in the environment file\nused to deploy the overcloud.(BZ#1259084)\n\n* Previously, deployment validation checked all OpenStack Bare Metal \n(ironic) nodes, including ones in maintenance mode (even though these\ncannot be deployed), which resulted in false errors and warnings. \nWith this update, nodes in maintenance mode are skipped by the\nvalidation step and false errors are no longer produced.(BZ#1261863)\n\n* Previously, the 'tempest-deployer-input.conf' file contained an\nincorrect stack_owner_role value, which meant that using this file for \npost-install validation caused Tempest test failures. With this update,\nthe stack_owner_role value generated during deployment has been changed.\nAs a result, fewer Tempest tests will fail during post-install validation.\n(BZ#1265714)\n\n* Previously, breakpoints were not removed when an update operation\nfailed. If a user ran the \"openstack overcloud update\" command and it\nfailed, the subsequent stack-update command (for example, \"openstack \novercloud deploy\") could be stuck in the 'IN_PROGRESS' state waiting for the \nremoval of breakpoints. With this update, all existing CLI commands \nexplicitly remove any existing breakpoints when running a stack-update \noperation, and stack-update operations do not get stuck in the 'IN_PROGRESS' \nstate.(BZ#1267558)\n\nAll Red Hat Enterprise Linux OpenStack Platform 7.0 director users are\nadvised to upgrade to these updated packages, which correct these issues\nand add these enhancements.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2015:2650"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-5303"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-5329"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1272297"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1281777"
+					}
+				],
+				"published": "2015-12-21T00:00:00Z",
+				"modified": "2015-12-21T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2015-5303",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-5303"
+					}
+				],
+				"published": "2015-12-09T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-5329",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:L/Au:N/C:P/I:P/A:P",
+							"base_score": 5.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-798"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-5329"
+					}
+				],
+				"published": "2015-11-11T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates",
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.6-94.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.6-94.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-rdomanager-oscplugin",
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.10-22.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.0.10-22.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-7"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates",
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.6-94.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.6-94.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-rdomanager-oscplugin",
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.10-22.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.0.10-22.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/definitions/oval:com.redhat.rhsa:def:20152650.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201712155001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20151862017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20152650001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20152650003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201712155002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151862034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20152650001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20152650003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20132099007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20132099008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/definitions/oval:com.redhat.rhsa:def:20152650.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20151862016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20151862017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20152650001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20152650003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151862032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151862034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20152650001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20152650003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20151639007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20151639008.json"
+		]
+	}
+}

@@ -1,0 +1,2716 @@
+{
+	"id": "RHSA-2018:1113",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2018:1113",
+				"title": "RHSA-2018:1113: qemu-kvm-rhev security and bug fix update (Moderate)",
+				"description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm-rhev packages provide the user-space component for running virtual machines that use KVM in environments managed by Red Hat products.\n\nSecurity Fix(es):\n\n* The Network Block Device (NBD) server in Quick Emulator (QEMU), is vulnerable to a denial of service issue. It could occur if a client sent large option requests, making the server waste CPU time on reading up to 4GB per request. A client could use this flaw to keep the NBD server from serving other requests, resulting in DoS. (CVE-2017-15119)\n\n* Qemu: vga: OOB read access during display update (CVE-2017-13672)\n\n* Qemu: vga: reachable assert failure during display update (CVE-2017-13673)\n\n* Qemu: Slirp: use-after-free when sending response (CVE-2017-13711)\n\n* VNC server implementation in Quick Emulator (QEMU) was found to be vulnerable to an unbounded memory allocation issue, as it did not throttle the framebuffer updates sent to its client. If the client did not consume these updates, VNC server allocates growing memory to hold onto this data. A malicious remote VNC client could use this flaw to cause DoS to the server host. (CVE-2017-15124)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nRed Hat would like to thank David Buchanan for reporting CVE-2017-13672 and CVE-2017-13673 and Wjjzhang (Tencent.com) for reporting CVE-2017-13711. The CVE-2017-15119 issue was discovered by Eric Blake (Red Hat) and the CVE-2017-15124 issue was discovered by Daniel Berrange (Red Hat).",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2018:1113"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13672"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13673"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13711"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15118"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15119"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15124"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15268"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-5683"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1486400"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1486560"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1486588"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1496879"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1516922"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1516925"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1525195"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1530356"
+					}
+				],
+				"published": "2018-04-11T00:00:00Z",
+				"modified": "2018-04-11T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-13672",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:S/C:N/I:N/A:P",
+							"base_score": 2.3,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.3,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.3,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3,
+							"base_severity": "LOW",
+							"temporal_score": 3,
+							"temporal_severity": "LOW",
+							"environmental_score": 3,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-125"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13672"
+					}
+				],
+				"published": "2017-08-24T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-13673",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:S/C:N/I:N/A:P",
+							"base_score": 2.3,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.3,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.3,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3,
+							"base_severity": "LOW",
+							"temporal_score": 3,
+							"temporal_severity": "LOW",
+							"environmental_score": 3,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-617"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13673"
+					}
+				],
+				"published": "2017-08-24T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-13711",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 2.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3.4,
+							"base_severity": "LOW",
+							"temporal_score": 3.4,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.4,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-416"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-13711"
+					}
+				],
+				"published": "2017-08-03T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15118",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+							"base_score": 7.5,
+							"nvd_base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"nvd_temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"nvd_environmental_severity": "HIGH"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L",
+							"base_score": 8.3,
+							"base_severity": "HIGH",
+							"temporal_score": 8.3,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.3,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-121"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15118"
+					}
+				],
+				"published": "2017-11-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15119",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 5.8,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15119"
+					}
+				],
+				"published": "2017-11-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15124",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:S/C:N/I:N/A:P",
+							"base_score": 2.1,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.1,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.1,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3.5,
+							"base_severity": "LOW",
+							"temporal_score": 3.5,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.5,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-770"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15124"
+					}
+				],
+				"published": "2017-12-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15268",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:S/C:N/I:N/A:P",
+							"base_score": 2.1,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.1,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.1,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:H/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3,
+							"base_severity": "LOW",
+							"temporal_score": 3,
+							"temporal_severity": "LOW",
+							"environmental_score": 3,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15268"
+					}
+				],
+				"published": "2017-09-22T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2018-5683",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:S/C:N/I:N/A:P",
+							"base_score": 2.3,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.3,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.3,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:L",
+							"base_score": 3,
+							"base_severity": "LOW",
+							"temporal_score": 3,
+							"temporal_severity": "LOW",
+							"environmental_score": 3,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-125"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-5683"
+					}
+				],
+				"published": "2017-12-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-12-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-9-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-9"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-9-tools-debug-rpms",
+													"rhel-7-desktop-openstack-9-tools-rpms",
+													"rhel-7-desktop-openstack-9-tools-source-rpms",
+													"rhel-7-server-openstack-9-debug-rpms",
+													"rhel-7-server-openstack-9-director-debug-rpms",
+													"rhel-7-server-openstack-9-director-rpms",
+													"rhel-7-server-openstack-9-director-source-rpms",
+													"rhel-7-server-openstack-9-optools-debug-rpms",
+													"rhel-7-server-openstack-9-optools-rpms",
+													"rhel-7-server-openstack-9-optools-source-rpms",
+													"rhel-7-server-openstack-9-rpms",
+													"rhel-7-server-openstack-9-source-rpms",
+													"rhel-7-server-openstack-9-tools-debug-rpms",
+													"rhel-7-server-openstack-9-tools-rpms",
+													"rhel-7-server-openstack-9-tools-source-rpms",
+													"rhel-7-workstation-openstack-9-tools-debug-rpms",
+													"rhel-7-workstation-openstack-9-tools-rpms",
+													"rhel-7-workstation-openstack-9-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-9-including-unpatched"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-8"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-8-including-unpatched"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10-including-unpatched"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-12"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-12-tools-debug-rpms",
+													"rhel-7-desktop-openstack-12-tools-rpms",
+													"rhel-7-desktop-openstack-12-tools-source-rpms",
+													"rhel-7-server-openstack-12-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-12-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-devtools-rpms",
+													"rhel-7-server-openstack-12-devtools-source-rpms",
+													"rhel-7-server-openstack-12-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-12-for-power-le-rpms",
+													"rhel-7-server-openstack-12-for-power-le-source-rpms",
+													"rhel-7-server-openstack-12-optools-debug-rpms",
+													"rhel-7-server-openstack-12-optools-rpms",
+													"rhel-7-server-openstack-12-optools-source-rpms",
+													"rhel-7-server-openstack-12-rpms",
+													"rhel-7-server-openstack-12-source-rpms",
+													"rhel-7-server-openstack-12-tools-debug-rpms",
+													"rhel-7-server-openstack-12-tools-rpms",
+													"rhel-7-server-openstack-12-tools-source-rpms",
+													"rhel-7-workstation-openstack-12-tools-debug-rpms",
+													"rhel-7-workstation-openstack-12-tools-rpms",
+													"rhel-7-workstation-openstack-12-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.10.0-21.el7"
+													}
+												],
+												"fixed": [
+													"10:2.10.0-21.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-12-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201710806001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201710806002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201710806003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201710806004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201710806002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201710806004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201710806006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201710806008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170328001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170328002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170328003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170328004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170328002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170328004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170328006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170328008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201711434001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201711434002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201711434003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201711434004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201711434002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201711434004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201711434006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201711434008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20152582005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20152582006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20181113002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20181113004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20183788005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-12/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20183788006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20158558001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20158558002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20158558005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20158558007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20158558002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20158558004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20158558010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20158558014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161002003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161002004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161002005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161002006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161002006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161002008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161002010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161002012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161002013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161002014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20163710002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20163710004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20163710005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20163710007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20163710004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20163710008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20163710010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20163710014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/definitions/oval:com.redhat.rhsa:def:20181113.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161763003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161763004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161763005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161763006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/states/rpminfo_state/oval:com.redhat.rhsa:ste:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161763006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161763008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161763010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161763012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20181113007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182140007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-9/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182140008.json"
+		]
+	}
+}

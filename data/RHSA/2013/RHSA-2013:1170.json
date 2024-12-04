@@ -1,0 +1,401 @@
+{
+	"id": "RHSA-2013:1170",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2013:1170",
+				"title": "RHSA-2013:1170: mongodb and pymongo security and enhancement update (Important)",
+				"description": "MongoDB is a NoSQL database. PyMongo provides tools for working with\nMongoDB.\n\nA flaw was found in the run() function implementation in MongoDB. A\ndatabase user permitted to send database queries to a MongoDB server could\nuse this flaw to crash the server or, possibly, execute arbitrary code with\nthe privileges of the mongodb user. (CVE-2013-1892)\n\nA NULL pointer dereference flaw was found in PyMongo. An invalid DBRef\nrecord received from a MongoDB server could cause an application using\nPyMongo to crash. (CVE-2013-2132)\n\nNote: In Red Hat Enterprise MRG Grid, MongoDB is not accessed by users\ndirectly and is only accessed by other Grid services, such as Condor and\nCumin.\n\nThis update also adds the following enhancement:\n\n* Previously, MongoDB was configured to listen for connections on all\nnetwork interfaces. This could allow remote users to access the database if\nthe firewall was configured to allow access to the MongoDB port (access is\nblocked by the default firewall configuration in Red Hat Enterprise Linux).\nThis update changes the configuration to only listen on the loopback\ninterface by default. (BZ#892767)\n\nUsers of Red Hat Enterprise MRG 2.3 for Red Hat Enterprise Linux 6 are\nadvised to upgrade to these updated packages, which contain backported\npatches to resolve these issues and add this enhancement. After installing\nthis update, MongoDB will be restarted automatically.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2013:1170"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-1892"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-2132"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/927536"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/969560"
+					}
+				],
+				"published": "2013-08-21T00:00:00Z",
+				"modified": "2013-08-21T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2013-1892",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-119"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-1892"
+					}
+				],
+				"published": "2013-03-24T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2013-2132",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-476"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-2132"
+					}
+				],
+				"published": "2013-05-31T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mongodb",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.4-6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.4-6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mongodb-server",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.4-6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.4-6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "pymongo",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.9-11.el6"
+													}
+												],
+												"fixed": [
+													"0:1.9-11.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-bson",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.9-11.el6"
+													}
+												],
+												"fixed": [
+													"0:1.9-11.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/definitions/oval:com.redhat.rhsa:def:20131170.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131170001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131170002.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131170003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131170004.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20131170001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20131170003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170002.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170004.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170005.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170006.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170007.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131170008.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496021.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496022.json"
+		]
+	}
+}

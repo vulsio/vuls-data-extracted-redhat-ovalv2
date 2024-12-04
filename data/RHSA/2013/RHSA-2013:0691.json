@@ -1,0 +1,1130 @@
+{
+	"id": "RHSA-2013:0691",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2013:0691",
+				"title": "RHSA-2013:0691: Red Hat Storage 2.0 security, bug fix, and enhancement update #4 (Important)",
+				"description": "Red Hat Storage is a software only, scale-out storage solution that\nprovides flexible and agile unstructured data storage for the enterprise.\n\nA flaw was found in the way the Swift component used Python pickle. This\ncould lead to arbitrary code execution. With this update, the JSON\n(JavaScript Object Notation) format is used. (CVE-2012-4406)\n\nMultiple insecure temporary file creation flaws were found in Red Hat\nStorage. A local user on the Red Hat Storage server could use these flaws\nto cause arbitrary files to be overwritten as the root user via a symbolic\nlink attack. (CVE-2012-5635)\n\nIt was found that sanlock created \"/var/run/sanlock/sanlock.pid\" with\nworld-writable permissions. A local user could use this flaw to make the\nsanlock init script kill an arbitrary process when the sanlock daemon is\nstopped or restarted. Additionally, \"/var/log/sanlock.log\" was also\nworld-writable, allowing local users to modify the contents of the log\nfile, or store data within it (bypassing any quotas applied to their\naccount). (CVE-2012-5638)\n\nRed Hat would like to thank Sebastian Krahmer of the SUSE Security Team for\nreporting CVE-2012-4406. The CVE-2012-5635 issues were discovered by Kurt\nSeifried of the Red Hat Security Response Team and Michael Scherer of the\nRed Hat Regional IT team, and CVE-2012-5638 was discovered by David\nTeigland of Red Hat.\n\nBug fixes and enhancements:\n\n* Options to provide POSIX behavior when the O_DIRECT flag is used with\nthe open() system call across many translators. (BZ#856156)\n\n* A mount time option provided to make the FUSE module's request queue\nlength configurable. (BZ#856206)\n\n* Various fixes in the FUSE module to ensure the 'read-only' (-o ro) mount\noption works. (BZ#858499)\n\n* Various fixes in GlusterFS's rebalance code to handle failures while\nreplica pairs are getting connected and disconnected in quick succession.\n(BZ#859387)\n\n* NFS code fixed to ensure proper inode transformation logic when the\n'enable-ino32' option is set. (BZ#864222)\n\n* Fixed the behavior of the posix-locks module per POSIX locking\nsemantics. As a result, smb-torture's ping-pong tests now run smoothly on\ntop of GlusterFS mounts. (BZ#869724)\n\n* FUSE module enhanced with the enable-ino32 mount option, required by any\n32-bit applications running on top of a GlusterFS mount. (BZ#876679)\n\n* Corrections were made to fd table behavior when both NFS and\ngeo-replication are in progress. (BZ#880193)\n\n* With this update, disconnections are now handled better in the\ngeo-replication 'gsyncd' process. (BZ#880308)\n\n* With this update, the 'gluster volume geo-replication config checkpoint'\ncommand returns the output value properly. (BZ#881736)\n\n* With this enhancement, it is possible to set the 'root-squash' volume\noption with Gluster CLI. Red Hat Storage volumes now support NFS's\nroot-squashing behavior. (BZ#883590)\n\n* NFS POSIX lock issue fixed when 'root-squash' option is enabled on the\nvolume. (BZ#906884)\n\n* Fixed an issue in tracking the changes of Geo-replication when an\nunprivileged user accesses the file system. (BZ#883827)\n\n* Fixed NFS locking manager (NLM) code to handle IP failover successfully.\n(BZ#888286)\n\n* Fixed issue in rebalance code to handle proper pointer dereference.\n(BZ#894237)\n\n* POSIX module made more robust to handle backend brick failures better.\n(BZ#895841)\n\n* Fixed the 'gluster volume geo-replication' command to provide a\nmeaningful message when a wrong hostname is entered. (BZ#902213)\n\n* Fixed Console Configuration Script where it added invalid 'security'\nconfiguration for ENGINEDataSource in JBoss. (BZ#922572)\n\n* Fixed rhsc-setup failure where it does not check for SELinux before\nrunning setsebool. (BZ#923674)\n\n* Provided an update to the rhn-client-tools package to ensure setup\ndefaults to the correct base Red Hat Enterprise Linux (6.2 Extended Update\nSupport). (BZ#911777)\n\nRefer to the Release Notes, available shortly from the link in the\nReferences section, for further information.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2013:0691"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-4406"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5635"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5638"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/854757"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/886364"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/887010"
+					}
+				],
+				"published": "2013-03-28T00:00:00Z",
+				"modified": "2013-03-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2012-4406",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+							"base_score": 7.5,
+							"nvd_base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"nvd_temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"nvd_environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-502"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-4406"
+					}
+				],
+				"published": "2012-05-30T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2012-5635",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:L/Au:N/C:N/I:P/A:N",
+							"base_score": 2.1,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.1,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.1,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-377"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5635"
+					}
+				],
+				"published": "2013-03-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2012-5638",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 2.1,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.1,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.1,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5638"
+					}
+				],
+				"published": "2012-08-22T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-fuse",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-rdma",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "storage-gluster-3"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-fuse",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "glusterfs-rdma",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-6-server-source-rpms",
+													"rhel-6-server-rhs-client-1-debug-rpms",
+													"rhel-6-server-rhs-client-1-rpms",
+													"rhel-6-server-rhs-client-1-source-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-debug-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-debug-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-big-data-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-debug-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhs-nagios-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-debug-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms",
+													"rhsc-3-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.3.0.7rhs-1.el6"
+													}
+												],
+												"fixed": [
+													"0:3.3.0.7rhs-1.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/definitions/oval:com.redhat.rhsa:def:20130691.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038004.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038005.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038007.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20130691001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038002.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038008.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038010.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038014.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691003.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691005.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691007.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20087313007.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20087313008.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/definitions/oval:com.redhat.rhsa:def:20130691.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038004.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038005.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhba:obj:20150038007.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/states/rpminfo_state/oval:com.redhat.rhsa:ste:20130691001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038002.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038008.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038010.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhba:tst:20150038014.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691001.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691003.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691005.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130691007.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20150038015.json",
+			"vuls-data-raw-redhat-ovalv2/6/storage-gluster-3/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20150038115.json"
+		]
+	}
+}

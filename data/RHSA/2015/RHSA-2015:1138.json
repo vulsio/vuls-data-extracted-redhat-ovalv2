@@ -1,0 +1,987 @@
+{
+	"id": "RHSA-2015:1138",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2015:1138",
+				"title": "RHSA-2015:1138: kernel-rt security, bug fix, and enhancement update (Important)",
+				"description": "The kernel-rt packages contain the Linux kernel, the core of any Linux\noperating system.\n\n* It was found that the Linux kernel's implementation of vectored pipe read\nand write functionality did not take into account the I/O vectors that were\nalready processed when retrying after a failed atomic access operation,\npotentially resulting in memory corruption due to an I/O vector array\noverrun. A local, unprivileged user could use this flaw to crash the system\nor, potentially, escalate their privileges on the system. (CVE-2015-1805,\nImportant)\n\n* A race condition flaw was found in the way the Linux kernel keys\nmanagement subsystem performed key garbage collection. A local attacker\ncould attempt accessing a key while it was being garbage collected, which\nwould cause the system to crash. (CVE-2014-9529, Moderate)\n\n* A flaw was found in the way the Linux kernel's 32-bit emulation\nimplementation handled forking or closing of a task with an 'int80' entry.\nA local user could potentially use this flaw to escalate their privileges\non the system. (CVE-2015-2830, Low)\n\n* It was found that the Linux kernel's ISO file system implementation did\nnot correctly limit the traversal of Rock Ridge extension Continuation\nEntries (CE). An attacker with physical access to the system could use this\nflaw to trigger an infinite loop in the kernel, resulting in a denial of\nservice. (CVE-2014-9420, Low)\n\n* An information leak flaw was found in the way the Linux kernel's ISO9660\nfile system implementation accessed data on an ISO9660 image with RockRidge\nExtension Reference (ER) records. An attacker with physical access to the\nsystem could use this flaw to disclose up to 255 bytes of kernel memory.\n(CVE-2014-9584, Low)\n\n* A flaw was found in the way the nft_flush_table() function of the Linux\nkernel's netfilter tables implementation flushed rules that were\nreferencing deleted chains. A local user who has the CAP_NET_ADMIN\ncapability could use this flaw to crash the system. (CVE-2015-1573, Low)\n\n* An integer overflow flaw was found in the way the Linux kernel randomized\nthe stack for processes on certain 64-bit architecture systems, such as\nx86-64, causing the stack entropy to be reduced by four. (CVE-2015-1593,\nLow)\n\nRed Hat would like to thank Carl Henrik Lunde for reporting CVE-2014-9420\nand CVE-2014-9584. The security impact of CVE-2015-1805 was discovered by\nRed Hat.\n\nThis update provides a build of the kernel-rt package for Red Hat\nEnterprise MRG 2.5 that is layered on Red Hat Enterprise Linux 6, and\nfixes the following issues:\n\n* storvsc: get rid of overly verbose warning messages\n* storvsc: force discovery of LUNs that may have been removed\n* storvsc: in responce to a scan event, scan the hos\n* storvsc: NULL pointer dereference fix\n* futex: Mention key referencing differences between shared and private\nfutexes\n* futex: Ensure get_futex_key_refs() always implies a barrier\n* kernel module: set nx before marking module MODULE_STATE_COMING\n* kernel module: Clean up ro/nx after early module load failures\n* btrfs: make xattr replace operations atomic\n* megaraid_sas: revert: Add release date and update driver version\n* radeon: fix kernel segfault in hwmonitor\n\n(BZ#1223077)\n\nBug fix:\n\n* There is an XFS optimization that depended on a spinlock to disable\npreemption using the preempt_disable() function. When CONFIG_PREEMPT_RT is\nenabled on realtime kernels, spinlocks do not disable preemption while\nheld, so the XFS critical section was not protected from preemption.\nSystems on the Realtime kernel-rt could lock up in this XFS optimization\nwhen a task that locked all the counters was then preempted by a realtime\ntask, causing all callers of that lock to block indefinitely. This update\ndisables the optimization when building a kernel with\nCONFIG_PREEMPT_RT_FULL enabled. (BZ#1217849)\n\nAll kernel-rt users are advised to upgrade to these updated packages, which\ncorrect these issues and add these enhancements. The system must be\nrebooted for this update to take effect.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2015:1138"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9420"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9529"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9584"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1573"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1593"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1805"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-2830"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1175235"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1179813"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1180119"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1190966"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1192519"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1202855"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1208598"
+					}
+				],
+				"published": "2015-06-23T00:00:00Z",
+				"modified": "2015-06-23T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2014-9420",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:N/I:N/A:C",
+							"base_score": 4.7,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.7,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.7,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-835"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9420"
+					}
+				],
+				"published": "2014-12-15T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-9529",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:L/Au:N/C:N/I:N/A:C",
+							"base_score": 4.9,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.9,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.9,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-416"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9529"
+					}
+				],
+				"published": "2014-12-29T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-9584",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 1.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 1.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 1.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9584"
+					}
+				],
+				"published": "2015-01-07T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-1573",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:H/Au:S/C:P/I:P/A:N",
+							"base_score": 2.4,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.4,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.4,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-416"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1573"
+					}
+				],
+				"published": "2015-01-16T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-1593",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 1.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 1.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 1.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1593"
+					}
+				],
+				"published": "2015-02-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-1805",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:C/I:C/A:C",
+							"base_score": 6.9,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.9,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.9,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-1805"
+					}
+				],
+				"published": "2015-06-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-2830",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:N/I:P/A:N",
+							"base_score": 1.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 1.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 1.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-393"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-2830"
+					}
+				],
+				"published": "2015-04-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-debug",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-debug-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-doc",
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-firmware",
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-trace",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-trace-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-vanilla",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "kernel-rt-vanilla-devel",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.10.0-229.rt56.153.el6rt"
+													}
+												],
+												"fixed": [
+													"1:3.10.0-229.rt56.153.el6rt"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/definitions/oval:com.redhat.rhsa:def:20151138.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496002.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496004.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496005.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496006.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496007.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496008.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496009.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20120496010.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151138001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151138003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496002.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496004.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496006.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496008.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496010.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496012.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496014.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496016.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496018.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20120496020.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138005.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138007.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138009.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138011.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138013.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138015.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138017.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151138019.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496021.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496022.json"
+		]
+	}
+}

@@ -1,0 +1,578 @@
+{
+	"id": "RHSA-2020:4391",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2020:4391",
+				"title": "RHSA-2020:4391: openstack-cinder security update (Moderate)",
+				"description": "OpenStack Block Storage (cinder) manages block storage mounting and the\npresentation of such mounted block storage to instances. The backend\nphysical storage can consist of local disks, or Fiber Channel, iSCSI, and\nNFS mounts attached to Compute nodes. In addition, Block Storage supports\nvolume backups, and snapshots for temporary save and restore operations.\nProgrammatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* Improper handling of ScaleIO backend credentials (CVE-2020-10755)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Before this update, FC live migration was failing. With this update, the correct device information is now sent to os-brick for FC for the corresponding host. Also, the device is now removed from the correct masking view when the live migration process has failed on the Compute node. (BZ#1841157)\n\n* Before this update, the 3PAR driver did not look at the `_name_id` field for a possible volume ID, which caused volumes to be unusable after a live migration. With this update, the driver is now aware of the `_name_id` field as an alternative location for the volume ID, and live migrated volumes now work as expected. (BZ#1841866)\n\n* Before this update, the internal temporary snapshot, created during async migration when creating a volume from a snapshot, was not being deleted from the VNX storage.\n\nFor example, if we create a new volume, V2, from snapshot S1, which we created from volume V1, an internal temporary snapshot, S2, is created from copying S1. V1 now has two snapshots, S1 and S2. Although we delete V1, V2 and S1 from OpenStack Block Storage (cinder), S2 is not deleted. This causes both V1 and S2 to remain on the VNX storage.\n\nWith this update, the temporary snapshot, S2, is deleted, and V1 can be successfully deleted. (BZ#1843196)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2020:4391"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-10755"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1842748"
+					}
+				],
+				"published": "2020-10-28T00:00:00Z",
+				"modified": "2020-10-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-13"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-13-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2020-10755",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-522"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-10755"
+					}
+				],
+				"published": "2020-06-03T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-13"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-13-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-13-tools-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-source-rpms",
+													"rhel-7-desktop-openstack-13-tools-rpms",
+													"rhel-7-desktop-openstack-13-tools-source-rpms",
+													"rhel-7-server-openstack-13-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-13-devtools-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-rpms",
+													"rhel-7-server-openstack-13-devtools-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-devtools-rpms",
+													"rhel-7-server-openstack-13-devtools-source-rpms",
+													"rhel-7-server-openstack-13-els-debug-rpms",
+													"rhel-7-server-openstack-13-els-rpms",
+													"rhel-7-server-openstack-13-els-source-rpms",
+													"rhel-7-server-openstack-13-eus-debug-rpms",
+													"rhel-7-server-openstack-13-eus-rpms",
+													"rhel-7-server-openstack-13-eus-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-rpms",
+													"rhel-7-server-openstack-13-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-octavia-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-rpms",
+													"rhel-7-server-openstack-13-octavia-els-source-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-source-rpms",
+													"rhel-7-server-openstack-13-octavia-rpms",
+													"rhel-7-server-openstack-13-octavia-source-rpms",
+													"rhel-7-server-openstack-13-optools-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-rpms",
+													"rhel-7-server-openstack-13-optools-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-optools-rpms",
+													"rhel-7-server-openstack-13-optools-source-rpms",
+													"rhel-7-server-openstack-13-rpms",
+													"rhel-7-server-openstack-13-source-rpms",
+													"rhel-7-server-openstack-13-tools-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-rpms",
+													"rhel-7-server-openstack-13-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-tools-rpms",
+													"rhel-7-server-openstack-13-tools-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-rpms",
+													"rhel-7-workstation-openstack-13-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:12.0.10-19.el7ost"
+													}
+												],
+												"fixed": [
+													"1:12.0.10-19.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-13-tools-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-source-rpms",
+													"rhel-7-desktop-openstack-13-tools-rpms",
+													"rhel-7-desktop-openstack-13-tools-source-rpms",
+													"rhel-7-server-openstack-13-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-13-devtools-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-rpms",
+													"rhel-7-server-openstack-13-devtools-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-devtools-rpms",
+													"rhel-7-server-openstack-13-devtools-source-rpms",
+													"rhel-7-server-openstack-13-els-debug-rpms",
+													"rhel-7-server-openstack-13-els-rpms",
+													"rhel-7-server-openstack-13-els-source-rpms",
+													"rhel-7-server-openstack-13-eus-debug-rpms",
+													"rhel-7-server-openstack-13-eus-rpms",
+													"rhel-7-server-openstack-13-eus-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-rpms",
+													"rhel-7-server-openstack-13-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-octavia-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-rpms",
+													"rhel-7-server-openstack-13-octavia-els-source-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-source-rpms",
+													"rhel-7-server-openstack-13-octavia-rpms",
+													"rhel-7-server-openstack-13-octavia-source-rpms",
+													"rhel-7-server-openstack-13-optools-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-rpms",
+													"rhel-7-server-openstack-13-optools-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-optools-rpms",
+													"rhel-7-server-openstack-13-optools-source-rpms",
+													"rhel-7-server-openstack-13-rpms",
+													"rhel-7-server-openstack-13-source-rpms",
+													"rhel-7-server-openstack-13-tools-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-rpms",
+													"rhel-7-server-openstack-13-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-tools-rpms",
+													"rhel-7-server-openstack-13-tools-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-rpms",
+													"rhel-7-workstation-openstack-13-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:12.0.10-19.el7ost"
+													}
+												],
+												"fixed": [
+													"1:12.0.10-19.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-13"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-13-tools-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-source-rpms",
+													"rhel-7-desktop-openstack-13-tools-rpms",
+													"rhel-7-desktop-openstack-13-tools-source-rpms",
+													"rhel-7-server-openstack-13-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-13-devtools-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-rpms",
+													"rhel-7-server-openstack-13-devtools-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-devtools-rpms",
+													"rhel-7-server-openstack-13-devtools-source-rpms",
+													"rhel-7-server-openstack-13-els-debug-rpms",
+													"rhel-7-server-openstack-13-els-rpms",
+													"rhel-7-server-openstack-13-els-source-rpms",
+													"rhel-7-server-openstack-13-eus-debug-rpms",
+													"rhel-7-server-openstack-13-eus-rpms",
+													"rhel-7-server-openstack-13-eus-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-rpms",
+													"rhel-7-server-openstack-13-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-octavia-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-rpms",
+													"rhel-7-server-openstack-13-octavia-els-source-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-source-rpms",
+													"rhel-7-server-openstack-13-octavia-rpms",
+													"rhel-7-server-openstack-13-octavia-source-rpms",
+													"rhel-7-server-openstack-13-optools-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-rpms",
+													"rhel-7-server-openstack-13-optools-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-optools-rpms",
+													"rhel-7-server-openstack-13-optools-source-rpms",
+													"rhel-7-server-openstack-13-rpms",
+													"rhel-7-server-openstack-13-source-rpms",
+													"rhel-7-server-openstack-13-tools-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-rpms",
+													"rhel-7-server-openstack-13-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-tools-rpms",
+													"rhel-7-server-openstack-13-tools-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-rpms",
+													"rhel-7-workstation-openstack-13-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:12.0.10-19.el7ost"
+													}
+												],
+												"fixed": [
+													"1:12.0.10-19.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-13-tools-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-debug-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-rpms",
+													"rhel-7-desktop-openstack-13-tools-els-source-rpms",
+													"rhel-7-desktop-openstack-13-tools-rpms",
+													"rhel-7-desktop-openstack-13-tools-source-rpms",
+													"rhel-7-server-openstack-13-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-rpms",
+													"rhel-7-server-openstack-13-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-13-devtools-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-els-rpms",
+													"rhel-7-server-openstack-13-devtools-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-devtools-rpms",
+													"rhel-7-server-openstack-13-devtools-source-rpms",
+													"rhel-7-server-openstack-13-els-debug-rpms",
+													"rhel-7-server-openstack-13-els-rpms",
+													"rhel-7-server-openstack-13-els-source-rpms",
+													"rhel-7-server-openstack-13-eus-debug-rpms",
+													"rhel-7-server-openstack-13-eus-rpms",
+													"rhel-7-server-openstack-13-eus-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-for-power-le-rpms",
+													"rhel-7-server-openstack-13-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-octavia-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-els-rpms",
+													"rhel-7-server-openstack-13-octavia-els-source-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-debug-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-rpms",
+													"rhel-7-server-openstack-13-octavia-eus-source-rpms",
+													"rhel-7-server-openstack-13-octavia-rpms",
+													"rhel-7-server-openstack-13-octavia-source-rpms",
+													"rhel-7-server-openstack-13-optools-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-els-rpms",
+													"rhel-7-server-openstack-13-optools-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-debug-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-els-source-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-rpms",
+													"rhel-7-server-openstack-13-optools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-13-optools-rpms",
+													"rhel-7-server-openstack-13-optools-source-rpms",
+													"rhel-7-server-openstack-13-rpms",
+													"rhel-7-server-openstack-13-source-rpms",
+													"rhel-7-server-openstack-13-tools-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-debug-rpms",
+													"rhel-7-server-openstack-13-tools-els-rpms",
+													"rhel-7-server-openstack-13-tools-els-source-rpms",
+													"rhel-7-server-openstack-13-tools-rpms",
+													"rhel-7-server-openstack-13-tools-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-debug-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-rpms",
+													"rhel-7-workstation-openstack-13-tools-els-source-rpms",
+													"rhel-7-workstation-openstack-13-tools-rpms",
+													"rhel-7-workstation-openstack-13-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:12.0.10-19.el7ost"
+													}
+												],
+												"fixed": [
+													"1:12.0.10-19.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-13-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/definitions/oval:com.redhat.rhsa:def:20204391.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20183601001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20183601002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20204391001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20183601002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20183601004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204391001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204391003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/definitions/oval:com.redhat.rhsa:def:20204391.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20183601001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20183601002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/states/rpminfo_state/oval:com.redhat.rhsa:ste:20204391001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20183601002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20183601004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204391001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204391003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190448067.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-13/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190448068.json"
+		]
+	}
+}

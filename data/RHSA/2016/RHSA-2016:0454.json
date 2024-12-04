@@ -1,0 +1,1879 @@
+{
+	"id": "RHSA-2016:0454",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2016:0454",
+				"title": "RHSA-2016:0454: ror40 security update (Important)",
+				"description": "The ror40 collection provides Ruby on Rails version 4.0. Ruby on Rails is\na model-view-controller (MVC) framework for web application development.\n\nThe following issues were corrected in rubygem-actionpack:\n\nMultiple directory traversal flaws were found in the way the Action View\ncomponent searched for templates for rendering. If an application passed\nuntrusted input to the 'render' method, a remote, unauthenticated attacker\ncould use these flaws to render unexpected files and, possibly, execute\narbitrary code. (CVE-2016-0752, CVE-2016-2097)\n\nA code injection flaw was found in the way the Action View component\nsearched for templates for rendering. If an application passed untrusted\ninput to the 'render' method, a remote, unauthenticated attacker could use\nthis flaw to execute arbitrary code. (CVE-2016-2098)\n\nA flaw was found in the way the Action Pack component performed MIME type\nlookups. Since queries were cached in a global cache of MIME types, an\nattacker could use this flaw to grow the cache indefinitely, potentially\nresulting in a denial of service. (CVE-2016-0751)\n\nA flaw was found in the Action Pack component's caching of controller\nreferences. An attacker could use this flaw to cause unbounded memory\ngrowth, potentially resulting in a denial of service. (CVE-2015-7581)\n\nA flaw was found in the way the Action Controller component compared user\nnames and passwords when performing HTTP basic authentication. Time taken\nto compare strings could differ depending on input, possibly allowing a\nremote attacker to determine valid user names and passwords using a timing\nattack. (CVE-2015-7576)\n\nThe following issue was corrected in rubygem-activerecord:\n\nA flaw was found in the Active Record component's handling of nested\nattributes in combination with the destroy flag. An attacker could possibly\nuse this flaw to set attributes to invalid values or clear all attributes.\n(CVE-2015-7577)\n\nRed Hat would like to thank the Ruby on Rails project for reporting these\nissues. Upstream acknowledges John Poulin as the original reporter of\nCVE-2016-0752, Jyoti Singh and Tobias Kraze (makandra) as original\nreporters of CVE-2016-2097, Tobias Kraze (makandra) and joernchen\n(Phenoelit) as original reporters of CVE-2016-2098, Aaron Patterson (Red\nHat) as the original reporter of CVE-2016-0751, Daniel Waterworth as the\noriginal reporter of CVE-2015-7576, and Justin Coyne as the original\nreporter of CVE-2015-7577.\n\nAll ror40 collection rubygem-actionpack and rubygem-activerecord packages\nusers are advised to upgrade to these updated packages, which contain\nbackported patches to correct these issues. All running applications using\nthe ror40 collection must be restarted for this update to take effect.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2016:0454"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7576"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7577"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7581"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0751"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0752"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2097"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2098"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301933"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301946"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301957"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301963"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301981"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1310043"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1310054"
+					}
+				],
+				"published": "2016-03-15T00:00:00Z",
+				"modified": "2016-03-15T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2015-7576",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-385"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7576"
+					}
+				],
+				"published": "2016-01-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-7577",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7577"
+					}
+				],
+				"published": "2016-01-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-7581",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-770"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-7581"
+					}
+				],
+				"published": "2016-01-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-0751",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-770"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0751"
+					}
+				],
+				"published": "2016-01-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-0752",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-22"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0752"
+					}
+				],
+				"published": "2016-01-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-2097",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-22"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2097"
+					}
+				],
+				"published": "2016-02-29T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-2098",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-94"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2098"
+					}
+				],
+				"published": "2016-02-29T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack",
+												"repositories": [
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el6"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack-doc",
+												"repositories": [
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el6"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord",
+												"repositories": [
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el6"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord-doc",
+												"repositories": [
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el6"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activesupport",
+												"repositories": [
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-debug-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-eus-source-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-server-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-debug-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms",
+													"rhel-workstation-rhscl-6-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-4.el6"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-4.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhscl"
+				}
+			]
+		},
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack-doc",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord-doc",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activesupport",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-4.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-4.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhscl"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-actionpack-doc",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-7.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activerecord-doc",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-6.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ror40-rubygem-activesupport",
+												"repositories": [
+													"rhel-7-server-for-arm-64-rhscl-debug-rpms",
+													"rhel-7-server-for-arm-64-rhscl-rpms",
+													"rhel-7-server-for-arm-64-rhscl-source-rpms",
+													"rhel-7-server-for-power-9-rhscl-debug-rpms",
+													"rhel-7-server-for-power-9-rhscl-rpms",
+													"rhel-7-server-for-power-9-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-eus-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-debug-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-le-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-debug-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-power-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-rpms",
+													"rhel-7-server-for-system-z-a-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-eus-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-debug-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-7-server-for-system-z-rhscl-source-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-debug-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-eus-source-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-server-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-debug-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms",
+													"rhel-workstation-rhscl-7-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:4.0.2-4.el7"
+													}
+												],
+												"fixed": [
+													"1:4.0.2-4.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhscl-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/definitions/oval:com.redhat.rhsa:def:20160454.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454009.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454010.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20131427029.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhscl/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20131427030.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/definitions/oval:com.redhat.rhsa:def:20160454.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20140081001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20140081004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20153227003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20140081002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20140081008.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20153227006.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454005.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454007.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454009.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:200620001019.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:200620001020.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/definitions/oval:com.redhat.rhsa:def:20160454.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20160454005.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160454004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140877004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454005.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454006.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454007.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454008.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454009.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160454010.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190772009.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhscl/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190772022.json"
+		]
+	}
+}

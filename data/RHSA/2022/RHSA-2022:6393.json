@@ -1,0 +1,2080 @@
+{
+	"id": "RHSA-2022:6393",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2022:6393",
+				"title": "RHSA-2022:6393: RHV Manager (ovirt-engine) [ovirt-4.5.2] bug fix and security update (Important)",
+				"description": "The ovirt-engine package provides the Red Hat Virtualization Manager, a centralized management platform that allows system administrators to view and manage virtual machines. The Manager provides a comprehensive range of features including search capabilities, resource management, live migrations, and virtual infrastructure provisioning.\n\nSecurity Fix(es):\n\n* nodejs-underscore: Arbitrary code execution via the template function (CVE-2021-23358)\n\n* moment: inefficient parsing algorithm resulting in DoS (CVE-2022-31129)\n\n* jquery: Cross-site scripting due to improper injQuery.htmlPrefilter method (CVE-2020-11022)\n\n* jquery: Untrusted code execution via <option> tag in HTML passed to DOM manipulation methods (CVE-2020-11023)\n\n* ovirt-log-collector: RHVM admin password is logged unfiltered (CVE-2022-2806)\n\n* springframework: malicious input leads to insertion of additional log entries (CVE-2021-22096)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, running engine-setup did not always renew OVN certificates close to expiration or expired. With this release, OVN certificates are always renewed by engine-setup when needed. (BZ#2097558)\n\n* Previously, the Manager issued warnings of approaching certificate expiration before engine-setup could update certificates. In this release expiration warnings and certificate update periods are aligned, and certificates are updated as soon as expiration warnings occur. (BZ#2097725)\n\n* With this release, OVA export or import work on hosts with a non-standard SSH port. (BZ#2104939)\n\n* With this release, the certificate validity test is compatible with RHEL 8 and RHEL 7 based hypervisors. (BZ#2107250)\n\n* RHV 4.4 SP1 and later are only supported on RHEL 8.6, customers cannot use RHEL 8.7 or later, and must stay with RHEL 8.6 EUS. (BZ#2108985)\n\n* Previously, importing templates from the Administration Portal did not work. With this release, importing templates from the Administration Portal is possible. (BZ#2109923)\n\n* ovirt-provider-ovn certificate expiration is checked along with other RHV certificates. If ovirt-provider-ovn is about to expire or already expired, a warning or alert is raised in the audit log. To renew the ovirt-provider-ovn certificate, administators must run engine-setup. If your ovirt-provider-ovn certificate expires on a previous RHV version, upgrade to RHV 4.4 SP1 batch 2 or later, and ovirt-provider-ovn certificate will be renewed automatically in the engine-setup. (BZ#2097560)\n\n* Previously, when importing a virtual machine with manual CPU pinning, the manual pinning string was cleared, but the CPU pinning policy was not set to NONE. As a result, importing failed. In this release, the CPU pinning policy is set to NONE if the CPU pinning string is cleared, and importing succeeds. (BZ#2104115)\n\n* Previously, the Manager could start a virtual machine with a Resize and Pin NUMA policy on a host without an equal number of physical sockets to NUMA nodes. As a result, wrong pinning was assigned to the policy. With this release, the Manager does not allow the virtual machine to be scheduled on such a virtual machine, and the pinning is correct based on the algorithm. (BZ#1955388)\n\n* Rebase package(s) to version: 4.4.7.\nHighlights, important fixes, or notable enhancements: fixed BZ#2081676 (BZ#2104831)\n\n* In this release, rhv-log-collector-analyzer provides detailed output for each problematic image, including disk names, associated virtual machine, the host running the virtual machine, snapshots, and current SPM. The detailed view is now the default. The compact option can be set by using the --compact switch in the command line. (BZ#2097536)\n\n* UnboundID LDAP SDK has been rebased on upstream version 6.0.4. See https://github.com/pingidentity/ldapsdk/releases for changes since version 4.0.14 (BZ#2092478)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2022:6393"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-11022"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-11023"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-22096"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-23358"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-2806"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-31129"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1828406"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1850004"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1944286"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2034584"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2080005"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2105075"
+					}
+				],
+				"published": "2022-09-08T00:00:00Z",
+				"modified": "2022-09-08T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2020-11022",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+							"base_score": 6.1,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.1,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.1,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-11022"
+					}
+				],
+				"published": "2020-04-23T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2020-11023",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+							"base_score": 6.1,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.1,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.1,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-11023"
+					}
+				],
+				"published": "2020-04-29T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2021-22096",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+							"base_score": 4.3,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-22096"
+					}
+				],
+				"published": "2021-10-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2021-23358",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7.2,
+							"base_severity": "HIGH",
+							"temporal_score": 7.2,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.2,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-94"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-23358"
+					}
+				],
+				"published": "2021-03-29T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-2806",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.1,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.1,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.1,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-200"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-2806"
+					}
+				],
+				"published": "2022-05-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-31129",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 7.5,
+							"base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-31129"
+					}
+				],
+				"published": "2022-07-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:8",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-backend",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-dbscripts",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-health-check-bundler",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-restapi",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-base",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-cinderlib",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-imageio",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-ovirt-engine",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-ovirt-engine-common",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-vmconsole-proxy-helper",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-websocket-proxy",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-tools",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-tools-backup",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-ui-extensions",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.3.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.3.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-vmconsole-proxy-helper",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-webadmin-portal",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-websocket-proxy",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-log-collector",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.4.7-2.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.4.7-2.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-web-ui",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.9.1-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.9.1-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python3-ovirt-engine-lib",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "rhvm",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvm-4"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-backend",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-dbscripts",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-health-check-bundler",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-restapi",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-base",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-cinderlib",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-imageio",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-ovirt-engine",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-ovirt-engine-common",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-vmconsole-proxy-helper",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-setup-plugin-websocket-proxy",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-tools",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-tools-backup",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-ui-extensions",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.3.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.3.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-vmconsole-proxy-helper",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-webadmin-portal",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-engine-websocket-proxy",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-log-collector",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.4.7-2.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.4.7-2.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-web-ui",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.9.1-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.9.1-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python3-ovirt-engine-lib",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "rhvm",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.5.2.4-0.1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.5.2.4-0.1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20226393.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20166341001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201920921020.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202123343001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202123362001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20166341002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921022.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921024.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921026.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921028.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921030.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921032.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921034.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921036.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921038.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201920921040.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202123343002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202123362002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393021.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393023.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393025.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393027.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393029.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393031.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393033.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393035.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393037.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393039.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393041.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393043.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393045.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20166341003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20166341004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247050.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/definitions/oval:com.redhat.rhsa:def:20226393.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247020.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247021.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247022.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247023.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203247024.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20203807002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226393005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247020.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247022.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247024.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247026.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247028.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247030.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247032.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247034.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247036.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247038.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247040.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247042.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247044.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247046.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203247048.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20203807004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393021.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393023.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393025.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393027.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393029.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393031.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393033.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393035.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393037.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393039.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393041.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393043.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226393045.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247049.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247050.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247051.json"
+		]
+	}
+}

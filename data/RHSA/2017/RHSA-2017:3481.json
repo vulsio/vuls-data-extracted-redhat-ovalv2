@@ -1,0 +1,894 @@
+{
+	"id": "RHSA-2017:3481",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2017:3481",
+				"title": "RHSA-2017:3481: heketi security update (Important)",
+				"description": "Heketi provides a RESTful management interface which can be used to manage the life cycle of GlusterFS volumes. With Heketi, cloud services like OpenStack Manila, Kubernetes, and OpenShift can dynamically provision GlusterFS volumes with any of the supported durability types. Heketi will automatically determine the location for bricks across the cluster, making sure to place bricks and its replicas across different failure domains. Heketi also supports any number of GlusterFS clusters, allowing cloud services to provide network file storage without being limited to a single GlusterFS cluster.\n\nSecurity Fix(es):\n\n* A security-check flaw was found in the way the Heketi server API handled user requests. An authenticated Heketi user could send specially crafted requests to the Heketi server, resulting in remote command execution as the user running Heketi server and possibly privilege escalation. (CVE-2017-15103)\n\n* An access flaw was found in heketi, where the heketi.json configuration file was world readable. An attacker having local access to the Heketi server could read plain-text passwords from the heketi.json file. (CVE-2017-15104)\n\nRed Hat would like to thank Markus Krell (NTT Security) for reporting CVE-2017-15103. The CVE-2017-15104 issue was discovered by Siddharth Sharma (Red Hat).",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2017:3481"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15103"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15104"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1510147"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1510149"
+					}
+				],
+				"published": "2017-12-18T00:00:00Z",
+				"modified": "2017-12-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-15103",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.8,
+							"base_severity": "HIGH",
+							"temporal_score": 8.8,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.8,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-78"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15103"
+					}
+				],
+				"published": "2017-12-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15104",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-552"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15104"
+					}
+				],
+				"published": "2017-12-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "heketi",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "heketi-client",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-heketi",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "storage-gluster-3"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "heketi",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "heketi-client",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-heketi",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rh-gluster-3-big-data-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-rpms",
+													"rh-gluster-3-big-data-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-rpms",
+													"rh-gluster-3-client-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nagios-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-nfs-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-samba-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-rpms",
+													"rh-gluster-3-splunk-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-agent-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-debug-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms",
+													"rh-gluster-3-web-admin-server-for-rhel-7-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.0.0-19.el7rhgs"
+													}
+												],
+												"fixed": [
+													"0:5.0.0-19.el7rhgs"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "storage-gluster-3-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/definitions/oval:com.redhat.rhsa:def:20173481.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481002.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481003.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481002.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481003.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481004.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481005.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481006.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20087313007.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20087313008.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/definitions/oval:com.redhat.rhsa:def:20173481.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481002.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20173481003.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/states/rpminfo_state/oval:com.redhat.rhsa:ste:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481001.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481002.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481003.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481004.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481005.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173481006.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20191965047.json",
+			"vuls-data-raw-redhat-ovalv2/7/storage-gluster-3/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20191965048.json"
+		]
+	}
+}

@@ -1,0 +1,2438 @@
+{
+	"id": "RHSA-2019:2652",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2019:2652",
+				"title": "RHSA-2019:2652: openstack-nova security and bug fix update (Moderate)",
+				"description": "OpenStack Compute (nova) launches and schedules large networks of virtual machines, creating a redundant and scalable cloud computing platform. Compute provides the software, control panels, and APIs required to orchestrate a cloud, including running virtual machine instances and controlling access through users and projects.\n\nSecurity Fix(es):\n\n* openstack-nova: Nova server resource faults leak external exception details (CVE-2019-14433)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page listed in the References section.\n\nBug Fix(es):\n\n* [OSP14] 'hw_vif_model' image metadata property should be ignored for SR-IOV-based VIFs (BZ#1724122)\n\n* [OSP14] Snapshot image of shelved instance, using rbd backend for glance and nova, remains due to an exception after unshelving. (BZ#1725708)\n\n* Before, a REVERT_RESIZE operation could fail if using the iptables_hybrid firewall driver. This would happen due to Neutron sending the network-vif-plugged external event before Nova starts to listen for it. Now, Nova will start listening for network-vif-plugged external event based on the characteristics of the port. In the case of an OVS hybrid plug, it will start listening before sending the port binding request to Neutron. (BZ#1730728)\n\n* [OSP14] Evacuation takes more than 2 hours with 109 instances depending on number of NIC on destination. (BZ#1732880)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2019:2652"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2019-14433"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1735522"
+					}
+				],
+				"published": "2019-09-04T00:00:00Z",
+				"modified": "2019-09-04T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-14"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-14-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2019-14433",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-209"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2019-14433"
+					}
+				],
+				"published": "2019-08-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-14"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-14-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cells",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-common",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-compute",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-conductor",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-console",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-migration",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-network",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-novncproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-placement-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-scheduler",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-serialproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-spicehtml5proxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-14"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-cells",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-common",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-compute",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-conductor",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-console",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-migration",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-network",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-novncproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-placement-api",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-scheduler",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-serialproxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-nova-spicehtml5proxy",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-nova-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-14-tools-debug-rpms",
+													"rhel-7-desktop-openstack-14-tools-rpms",
+													"rhel-7-desktop-openstack-14-tools-source-rpms",
+													"rhel-7-server-openstack-14-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-rpms",
+													"rhel-7-server-openstack-14-deployment-tools-source-rpms",
+													"rhel-7-server-openstack-14-devtools-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-rpms",
+													"rhel-7-server-openstack-14-devtools-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-devtools-rpms",
+													"rhel-7-server-openstack-14-devtools-source-rpms",
+													"rhel-7-server-openstack-14-for-power-9-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-9-rpms",
+													"rhel-7-server-openstack-14-for-power-9-source-rpms",
+													"rhel-7-server-openstack-14-for-power-le-debug-rpms",
+													"rhel-7-server-openstack-14-for-power-le-rpms",
+													"rhel-7-server-openstack-14-for-power-le-source-rpms",
+													"rhel-7-server-openstack-14-optools-debug-rpms",
+													"rhel-7-server-openstack-14-optools-rpms",
+													"rhel-7-server-openstack-14-optools-source-rpms",
+													"rhel-7-server-openstack-14-rpms",
+													"rhel-7-server-openstack-14-source-rpms",
+													"rhel-7-server-openstack-14-tools-debug-rpms",
+													"rhel-7-server-openstack-14-tools-rpms",
+													"rhel-7-server-openstack-14-tools-source-rpms",
+													"rhel-7-workstation-openstack-14-tools-debug-rpms",
+													"rhel-7-workstation-openstack-14-tools-rpms",
+													"rhel-7-workstation-openstack-14-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:18.2.1-0.20190509150817.8e130e2.el7ost"
+													}
+												],
+												"fixed": [
+													"1:18.2.1-0.20190509150817.8e130e2.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-14-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/definitions/oval:com.redhat.rhsa:def:20192652.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201718635001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201718635002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652022.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:201610735005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:201610735006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/definitions/oval:com.redhat.rhsa:def:20192652.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20192652016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/states/rpminfo_state/oval:com.redhat.rhsa:ste:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652020.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652022.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20192652032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190944143.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-14/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20190944144.json"
+		]
+	}
+}

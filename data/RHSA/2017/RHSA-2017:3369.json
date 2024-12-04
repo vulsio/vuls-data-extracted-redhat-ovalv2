@@ -1,0 +1,1113 @@
+{
+	"id": "RHSA-2017:3369",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2017:3369",
+				"title": "RHSA-2017:3369: qemu-kvm-rhev security and bug fix update (Moderate)",
+				"description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm-rhev packages provide the user-space component for running virtual machines that use KVM in environments managed by Red Hat products.\n\nSecurity Fix(es):\n\n* Quick Emulator (QEMU), compiled with qemu_map_ram_ptr to access guests' RAM block area, is vulnerable to an OOB r/w access issue. The crash can occur if a privileged user inside a guest conducts certain DMA operations, resulting in a DoS. (CVE-2017-11334)\n\n* Quick Emulator (QEMU), compiled with the PC System Emulator with multiboot feature support, is vulnerable to an OOB r/w memory access issue. The issue could occur due to an integer overflow while loading a kernel image during a guest boot. A user or process could use this flaw to potentially achieve arbitrary code execution on a host. (CVE-2017-14167)\n\n* Quick emulator (QEMU), compiled with the Cirrus CLGD 54xx VGA Emulator support, is vulnerable to an OOB write access issue. The issue could occur while writing to VGA memory via mode4and5 write functions. A privileged user inside guest could use this flaw to crash the QEMU process resulting in Denial of Serivce (DoS). (CVE-2017-15289)\n\nRed Hat would like to thank Alex for reporting CVE-2017-11334; Thomas Garnier (Google.com) for reporting CVE-2017-14167; and Guoxiang Niu (Huawei.com) for reporting CVE-2017-15289.\n\nBug Fix(es):\n\n* Improvements made for qemu 2.9 to the NBD code used during live storage migration were not robust to an abrupt exit of the other end of the connection; the result was that live migration could fail if the source side NBD connection failed. The NBD code has been fixed to be more robust regardless of what the other side of the connection does. (BZ#1495474)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2017:3369"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-11334"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-14167"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15289"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1471638"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1489375"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1501290"
+					}
+				],
+				"published": "2017-11-30T00:00:00Z",
+				"modified": "2017-11-30T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-11334",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:S/C:N/I:P/A:P",
+							"base_score": 3.8,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 3.8,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 3.8,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L",
+							"base_score": 5.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-787"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-11334"
+					}
+				],
+				"published": "2017-07-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-14167",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:H/Au:N/C:P/I:P/A:P",
+							"base_score": 3.7,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 3.7,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 3.7,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+							"base_score": 4.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-14167"
+					}
+				],
+				"published": "2017-09-05T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-15289",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:H/Au:S/C:N/I:P/A:P",
+							"base_score": 2.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:A/AC:H/PR:L/UI:N/S:C/C:N/I:L/A:L",
+							"base_score": 4.4,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.4,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.4,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-787"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15289"
+					}
+				],
+				"published": "2017-10-11T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-img-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-common-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qemu-kvm-tools-rhev",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-server-rhev-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-rpms",
+													"rhel-7-server-rhev-mgmt-agent-els-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhev-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhev-mgmt-agent-rpms",
+													"rhel-7-server-rhev-mgmt-agent-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-rpms",
+													"rhel-7-server-rhev-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhev-tools-for-power-rpms",
+													"rhel-7-server-rhev-tools-for-power-source-rpms",
+													"rhel-7-server-rhevh-debug-rpms",
+													"rhel-7-server-rhevh-els-debug-rpms",
+													"rhel-7-server-rhevh-els-rpms",
+													"rhel-7-server-rhevh-els-source-rpms",
+													"rhel-7-server-rhevh-rpms",
+													"rhel-7-server-rhevh-source-rpms",
+													"rhel-7-server-rhv-4-manager-tools-debug-rpms",
+													"rhel-7-server-rhv-4-manager-tools-rpms",
+													"rhel-7-server-rhv-4-manager-tools-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-9-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-rpms",
+													"rhel-7-server-rhv-4-mgmt-agent-source-rpms",
+													"rhel-7-server-rhv-4-tools-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-debug-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-rpms",
+													"rhel-7-server-rhv-4-tools-for-power-le-source-rpms",
+													"rhel-7-server-rhv-4-tools-rpms",
+													"rhel-7-server-rhv-4-tools-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-debug-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-rpms",
+													"rhel-7-server-rhv-4.2-mgmt-agent-for-power-le-eus-source-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-debug-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-rpms",
+													"rhel-7-server-rhv-4.3-mgmt-agent-eus-source-rpms",
+													"rhel-7-server-rhvh-4-build-debug-rpms",
+													"rhel-7-server-rhvh-4-build-rpms",
+													"rhel-7-server-rhvh-4-build-source-rpms",
+													"rhel-7-server-rhvh-4-debug-rpms",
+													"rhel-7-server-rhvh-4-rpms",
+													"rhel-7-server-rhvh-4-source-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-rpms",
+													"rhel-7-server-rhvh-4.2-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.2-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.2-eus-rpms",
+													"rhel-7-server-rhvh-4.2-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-rpms",
+													"rhel-7-server-rhvh-4.3-build-eus-source-rpms",
+													"rhel-7-server-rhvh-4.3-eus-debug-rpms",
+													"rhel-7-server-rhvh-4.3-eus-rpms",
+													"rhel-7-server-rhvh-4.3-eus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "10:2.9.0-16.el7_4.11"
+													}
+												],
+												"fixed": [
+													"10:2.9.0-16.el7_4.11"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20173369.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20173369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350006.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350008.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369005.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369007.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20172529011.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20172529012.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/definitions/oval:com.redhat.rhsa:def:20173369.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170350004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20173369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350002.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350004.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350006.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170350008.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369001.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369003.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369005.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20173369007.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20172529011.json",
+			"vuls-data-raw-redhat-ovalv2/7/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20172529012.json"
+		]
+	}
+}

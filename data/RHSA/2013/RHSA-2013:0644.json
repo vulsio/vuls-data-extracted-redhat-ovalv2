@@ -1,0 +1,261 @@
+{
+	"id": "RHSA-2013:0644",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2013:0644",
+				"title": "RHSA-2013:0644: apache-cxf security update (Important)",
+				"description": "Apache CXF is an open source services framework.\n\nIt was found that the Apache CXF UsernameTokenPolicyValidator and\nUsernameTokenInterceptor allowed a UsernameToken element with no password\nchild element to bypass authentication. A remote attacker could use this\nflaw to circumvent access controls applied to web services by omitting the\npassword in a UsernameToken. This flaw was exploitable on web services that\nrely on WS-SecurityPolicy plain text UsernameTokens to authenticate users.\nIt was not exploitable when using hashed passwords or WS-Security without\nWS-SecurityPolicy. (CVE-2013-0239)\n\nIf web services were deployed using Apache CXF with the WSS4JInInterceptor\nenabled to apply WS-Security processing, HTTP GET requests to these\nservices were always granted access, without applying authentication\nchecks. The URIMappingInterceptor is a legacy mechanism for allowing\nREST-like access (via GET requests) to simple SOAP services. A remote\nattacker could use this flaw to access the REST-like interface of a simple\nSOAP service using GET requests that bypass the security constraints\napplied by WSS4JInInterceptor. This flaw was only exploitable if\nWSS4JInInterceptor was used to apply WS-Security processing. Services that\nuse WS-SecurityPolicy to apply security were not affected. (CVE-2012-5633)\n\nWarning: Before applying this update, back up your existing JBoss\nEnterprise Application Platform installation and deployed applications.\n\nAll users of JBoss Enterprise Application Platform 6.0.1 on Red Hat\nEnterprise Linux 5 and 6 are advised to upgrade to this updated package.\nThe JBoss server process must be restarted for the update to take effect.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2013:0644"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5633"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-0239"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/889008"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/905722"
+					}
+				],
+				"published": "2013-03-13T00:00:00Z",
+				"modified": "2013-03-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:5",
+					"tag": "jboss-eap-6"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2012-5633",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:P/I:P/A:N",
+							"base_score": 6.4,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.4,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.4,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2012-5633"
+					}
+				],
+				"published": "2013-02-08T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:5",
+					"tag": "jboss-eap-6"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2013-0239",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:P/I:P/A:N",
+							"base_score": 6.4,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.4,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.4,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-0239"
+					}
+				],
+				"published": "2013-02-08T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:5",
+					"tag": "jboss-eap-6"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:5",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "apache-cxf",
+										"repositories": [
+											"jb-eap-6-for-rhel-5-server-rpms",
+											"jb-eap-6-for-rhel-5-server-source-rpms",
+											"jb-eap-6.3-for-rhel-5-server-rpms",
+											"jb-eap-6.3-for-rhel-5-server-source-rpms",
+											"jb-eap-6.4-for-rhel-5-server-rpms",
+											"jb-eap-6.4-for-rhel-5-server-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:2.4.9-6.redhat_3.ep6.el5"
+											}
+										],
+										"fixed": [
+											"0:2.4.9-6.redhat_3.ep6.el5"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "jboss-eap-6"
+				}
+			]
+		},
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "apache-cxf",
+										"repositories": [
+											"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+											"jb-eap-6-for-rhel-6-for-power-rpms",
+											"jb-eap-6-for-rhel-6-for-power-source-rpms",
+											"jb-eap-6-for-rhel-6-server-debug-rpms",
+											"jb-eap-6-for-rhel-6-server-rpms",
+											"jb-eap-6-for-rhel-6-server-source-rpms",
+											"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+											"jb-eap-6.3-for-rhel-6-for-power-rpms",
+											"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+											"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+											"jb-eap-6.3-for-rhel-6-server-rpms",
+											"jb-eap-6.3-for-rhel-6-server-source-rpms",
+											"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+											"jb-eap-6.4-for-rhel-6-for-power-rpms",
+											"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+											"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+											"jb-eap-6.4-for-rhel-6-server-rpms",
+											"jb-eap-6.4-for-rhel-6-server-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:2.4.9-6.redhat_3.ep6.el6"
+											}
+										],
+										"fixed": [
+											"0:2.4.9-6.redhat_3.ep6.el6"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/definitions/oval:com.redhat.rhsa:def:20130644.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121591175.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20130644001.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121591350.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130644001.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhea:tst:20151076151.json",
+			"vuls-data-raw-redhat-ovalv2/5/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhea:tst:20151076152.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/definitions/oval:com.redhat.rhsa:def:20130644.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592168.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20130644001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592336.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130644001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20151073005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20151073006.json"
+		]
+	}
+}

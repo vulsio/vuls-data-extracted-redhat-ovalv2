@@ -1,0 +1,418 @@
+{
+	"id": "RHSA-2015:1642",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2015:1642",
+				"title": "RHSA-2015:1642: Red Hat JBoss Web Server 2.1.0 security update (Important)",
+				"description": "Red Hat JBoss Web Server is a fully integrated and certified set of\ncomponents for hosting Java web applications. It is comprised of the Apache\nHTTP Server, the Apache Tomcat Servlet container, Apache Tomcat Connector\n(mod_jk), JBoss HTTP Connector (mod_cluster), Hibernate, and the Tomcat\nNative library.\n\nA flaw was found in the way the mod_cluster manager processed certain MCMP\nmessages. An attacker with access to the network from which MCMP messages\nare allowed to be sent could use this flaw to execute arbitrary JavaScript\ncode in the mod_cluster manager web interface. (CVE-2015-0298)\n\nIt was discovered that a JkUnmount rule for a subtree of a previous JkMount\nrule could be ignored. This could allow a remote attacker to potentially\naccess a private artifact in a tree that would otherwise not be accessible\nto them. (CVE-2014-8111)\n\nAll users of Red Hat JBoss Web Server 2.1.0 are advised to apply this\nupdate. The Red Hat JBoss Web Server process must be restarted for the\nupdate to take effect.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2015:1642"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-8111"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0298"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1182591"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1197769"
+					}
+				],
+				"published": "2015-08-18T00:00:00Z",
+				"modified": "2015-08-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2014-8111",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-8111"
+					}
+				],
+				"published": "2015-04-14T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-0298",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:L/Au:S/C:P/I:P/A:P",
+							"base_score": 5.2,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.2,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.2,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0298"
+					}
+				],
+				"published": "2015-05-05T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-4.Final_redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-4.Final_redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-ap22",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-4.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-4.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-4.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-4.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-ws-2"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-4.Final_redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-4.Final_redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-ap22",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-4.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-4.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-4.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-4.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/definitions/oval:com.redhat.rhsa:def:20151642.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20166808001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20166808003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151642001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151642003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20166808002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20166808006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20010131017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20010131018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/definitions/oval:com.redhat.rhsa:def:20151642.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151642001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20151642003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20151642005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20160090023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20160090024.json"
+		]
+	}
+}

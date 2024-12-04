@@ -1,0 +1,411 @@
+{
+	"id": "RHSA-2016:2061",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2016:2061",
+				"title": "RHSA-2016:2061: mariadb-galera security and bug fix update (Important)",
+				"description": "MariaDB is a multi-user, multi-threaded SQL database server that is binary compatible with MySQL. Galera is a synchronous multi-master cluster for MariaDB.\n\nSecurity Fix(es):\n\n* It was discovered that the MySQL logging functionality allowed writing to MySQL configuration files. An administrative database user, or a database user with FILE privileges, could possibly use this flaw to run arbitrary commands with root privileges on the system running the database server. (CVE-2016-6662)\n\nBug Fix(es):\n\n* Previously, both the mariadb-server and mariadb-galera-server packages shipped the client-facing libraries, dialog.so and mysql_clear_password.so. As a result, the mariadb-galera-server package would fail to install because of package conflicts. With this update, these libraries have been moved from mariadb-galera-server to mariadb-libs, and the mariadb-galera-server package installs successfully. (BZ#1376904)\n\n* Because Red Hat Enterprise Linux 7.3 changed the return format of the \"systemctl is-enabled\" command as consumed by shell scripts, the mariadb-galera RPM package, upon installation, erroneously detected that the MariaDB service was enabled when it was not. As a result, the Red Hat OpenStack Platform installer, which then tried to run mariadb-galera using Pacemaker and not systemd, failed to start Galera. With this update, mariadb-galera's RPM installation scripts now use a different systemctl command, correctly detecting the default MariaDB as disabled, and the installer can succeed. (BZ#1376910)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2016:2061"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6662"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1375198"
+					}
+				],
+				"published": "2016-10-13T00:00:00Z",
+				"modified": "2016-10-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2016-6662",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:S/C:C/I:C/A:C",
+							"base_score": 7.1,
+							"nvd_base_severity": "HIGH",
+							"temporal_score": 7.1,
+							"nvd_temporal_severity": "HIGH",
+							"environmental_score": 7.1,
+							"nvd_environmental_severity": "HIGH"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 9.8,
+							"base_severity": "CRITICAL",
+							"temporal_score": 9.8,
+							"temporal_severity": "CRITICAL",
+							"environmental_score": 9.8,
+							"environmental_severity": "CRITICAL"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-732"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6662"
+					}
+				],
+				"published": "2016-09-12T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mariadb-galera-common",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:5.5.42-5.el7ost"
+													}
+												],
+												"fixed": [
+													"1:5.5.42-5.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mariadb-galera-server",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:5.5.42-5.el7ost"
+													}
+												],
+												"fixed": [
+													"1:5.5.42-5.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-7"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mariadb-galera-common",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:5.5.42-5.el7ost"
+													}
+												],
+												"fixed": [
+													"1:5.5.42-5.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mariadb-galera-server",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-desktop-openstack-7.0-tools-debug-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-rpms",
+													"rhel-7-desktop-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7.0-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-director-rpms",
+													"rhel-7-server-openstack-7.0-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-debug-rpms",
+													"rhel-7-server-openstack-7.0-els-director-rpms",
+													"rhel-7-server-openstack-7.0-els-director-source-rpms",
+													"rhel-7-server-openstack-7.0-els-rpms",
+													"rhel-7-server-openstack-7.0-els-source-rpms",
+													"rhel-7-server-openstack-7.0-optools-debug-rpms",
+													"rhel-7-server-openstack-7.0-optools-rpms",
+													"rhel-7-server-openstack-7.0-optools-source-rpms",
+													"rhel-7-server-openstack-7.0-rpms",
+													"rhel-7-server-openstack-7.0-source-rpms",
+													"rhel-7-server-openstack-7.0-tools-debug-rpms",
+													"rhel-7-server-openstack-7.0-tools-rpms",
+													"rhel-7-server-openstack-7.0-tools-source-rpms",
+													"rhel-7-server-openstack-7_DOT_0-els-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-debug-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-director-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-rpms__7_DOT_4__x86_64",
+													"rhel-7-server-openstack-7_DOT_0-els-source-rpms__7_DOT_4__x86_64",
+													"rhel-7-workstation-openstack-7.0-tools-debug-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-rpms",
+													"rhel-7-workstation-openstack-7.0-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:5.5.42-5.el7ost"
+													}
+												],
+												"fixed": [
+													"1:5.5.42-5.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-7-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/definitions/oval:com.redhat.rhsa:def:20162061.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20150499001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20150499002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20162061001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20150499002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20150499004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20132099007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20132099008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/definitions/oval:com.redhat.rhsa:def:20162061.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20162061001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20162061002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20162061001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162061004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20151639007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20151639008.json"
+		]
+	}
+}

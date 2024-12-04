@@ -1,0 +1,4162 @@
+{
+	"id": "RHSA-2017:0244",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2017:0244",
+				"title": "RHSA-2017:0244: Red Hat JBoss Enterprise Application Platform security update (Important)",
+				"description": "Red Hat JBoss Enterprise Application Platform 6 is a platform for Java applications based on JBoss Application Server 7.\n\nThis release of Red Hat JBoss Enterprise Application Platform 6.4.13 serves as a replacement for Red Hat JBoss Enterprise Application Platform 6.4.12, and includes bug fixes and enhancements, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* It was discovered that the jboss init script performed unsafe file handling which could result in local privilege escalation. (CVE-2016-8656)\n\n* It was discovered that the code that parsed the HTTP request line permitted invalid characters. This could be exploited, in conjunction with a proxy that also permitted the invalid characters but with a different interpretation, to inject data into the HTTP response. By manipulating the HTTP response the attacker could poison a web-cache, perform an XSS attack and/or obtain sensitive information from requests other then their own. (CVE-2016-6816)\n\n* An EAP feature to download server log files allows logs to be available via GET requests making them vulnerable to cross-origin attacks. An attacker could trigger the user's browser to request the log files consuming enough resources that normal server functioning could be impaired. (CVE-2016-8627)\n\n* It was discovered that when configuring RBAC and marking information as sensitive, users with a Monitor role are able to view the sensitive information. (CVE-2016-7061)\n\nThe CVE-2016-8627 issue was discovered by Darran Lofthouse and Brian Stansberry (Red Hat).",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2017:0244"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6816"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-7061"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-8627"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-8656"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1380852"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1388240"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1397484"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1400344"
+					}
+				],
+				"published": "2017-02-02T00:00:00Z",
+				"modified": "2017-02-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2016-6816",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+							"base_score": 5.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-444"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6816"
+					}
+				],
+				"published": "2016-11-22T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-7061",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:S/C:P/I:N/A:N",
+							"base_score": 4,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:N/A:N",
+							"base_score": 3.5,
+							"base_severity": "LOW",
+							"temporal_score": 3.5,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.5,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-200"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-7061"
+					}
+				],
+				"published": "2016-11-07T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-8627",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+							"base_score": 4.3,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-8627"
+					}
+				],
+				"published": "2017-01-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-8656",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:M/Au:N/C:C/I:C/A:C",
+							"base_score": 6.9,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.9,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.9,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7,
+							"base_severity": "HIGH",
+							"temporal_score": 7,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-284"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-8656"
+					}
+				],
+				"published": "2016-09-15T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-cxf",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.7.18-5.SP4_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.7.18-5.SP4_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hornetq",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.3.25-18.SP16_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.3.25-18.SP16_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "infinispan",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "infinispan-cachestore-jdbc",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "infinispan-cachestore-remote",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "infinispan-client-hotrod",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "infinispan-core",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:5.2.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-appclient",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-cli",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-client-all",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-clustering",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-cmp",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-configadmin",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-connector",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-console",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.15-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.5.15-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-controller",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-controller-client",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-core-security",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-deployment-repository",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-deployment-scanner",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-domain-http",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-domain-management",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-ee",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-ee-deployment",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-ejb3",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-embedded",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-host-controller",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jacorb",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jaxr",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jaxrs",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jdr",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jmx",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jpa",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jsf",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-jsr77",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-logging",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-mail",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-management-client-content",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-messaging",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-modcluster",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-naming",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-network",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-osgi",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-osgi-configadmin",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-osgi-service",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-picketlink",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-platform-mbean",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-pojo",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-process-controller",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-protocol",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-remoting",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-sar",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-security",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-server",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-system-jmx",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-threads",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-transactions",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-version",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-web",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-webservices",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-weld",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-as-xts",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-ejb-client",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.38-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.0.38-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-hal",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.15-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.5.15-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-appclient",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-bundles",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-core",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-domain",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-5.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-5.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-javadocs",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-3.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-3.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-modules-eap",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-product-eap",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-standalone",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-5.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-5.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossas-welcome-content-eap",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.13-2.Final_redhat_2.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbossweb",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.5.20-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.5.20-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "resteasy",
+												"repositories": [
+													"jb-eap-6-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6-for-rhel-6-for-power-rpms",
+													"jb-eap-6-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6-for-rhel-6-server-debug-rpms",
+													"jb-eap-6-for-rhel-6-server-rpms",
+													"jb-eap-6-for-rhel-6-server-source-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-rpms",
+													"jb-eap-6.3-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.3-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.3-for-rhel-6-server-rpms",
+													"jb-eap-6.3-for-rhel-6-server-source-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-rpms",
+													"jb-eap-6.4-for-rhel-6-for-power-source-rpms",
+													"jb-eap-6.4-for-rhel-6-server-debug-rpms",
+													"jb-eap-6.4-for-rhel-6-server-rpms",
+													"jb-eap-6.4-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.3.16-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.3.16-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-eap-6"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/definitions/oval:com.redhat.rhsa:def:20170244.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075036.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075038.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075040.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075042.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075044.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075046.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075050.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075052.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075054.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075058.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075060.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075062.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075064.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075066.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075068.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075070.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075072.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075073.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075074.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhea:obj:20151075075.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592168.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592172.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592173.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592178.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592179.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592180.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592181.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592182.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121592220.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131208060.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/states/rpminfo_state/oval:com.redhat.rhsa:ste:20170244011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075036.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075038.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075040.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075042.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075044.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075046.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075050.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075052.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075054.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075058.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075060.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075062.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075064.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075066.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075068.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075070.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075072.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075074.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075076.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075078.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075080.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075082.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075084.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075086.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075088.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075090.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075092.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075094.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075096.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075098.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075100.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075102.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075104.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075106.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075108.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075110.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075112.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075114.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075116.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075118.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075120.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075122.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075124.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075126.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075128.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075130.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075132.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075134.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075136.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075138.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075140.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075142.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075144.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075146.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075148.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhea:tst:20151075150.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592336.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592344.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592346.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592356.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592358.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592360.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592362.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592364.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121592440.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131208120.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244073.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244075.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244077.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244079.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244081.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244083.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244085.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244087.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244089.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244091.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244093.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244095.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244097.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244099.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244101.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244103.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244105.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244107.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244109.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244111.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244113.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244115.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244117.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244119.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244121.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244123.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244125.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244127.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244129.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244131.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244133.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244135.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244137.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244139.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244141.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244143.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244145.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244147.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170244149.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20151073005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-eap-6/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20151073006.json"
+		]
+	}
+}

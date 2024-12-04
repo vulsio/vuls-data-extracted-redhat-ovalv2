@@ -1,0 +1,2483 @@
+{
+	"id": "RHSA-2017:2808",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2017:2808",
+				"title": "RHSA-2017:2808: Red Hat JBoss Enterprise Application Platform security update (Important)",
+				"description": "Red Hat JBoss Enterprise Application Platform is a platform for Java applications based on the JBoss Application Server.\n\nThis release of Red Hat JBoss Enterprise Application Platform 7.0.8 serves as a replacement for Red Hat JBoss Enterprise Application Platform 7.0.7, and includes bug fixes and enhancements, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* It was found that when using remote logging with log4j socket server the log4j server would deserialize any log event received via TCP or UDP. An attacker could use this flaw to send a specially crafted log event that, during deserialization, would execute arbitrary code in the context of the logger application. (CVE-2017-5645)\n\n* A vulnerability was found in Jasypt that would allow an attacker to perform a timing attack on password hash comparison. (CVE-2014-9970)\n\n* It was found that an information disclosure flaw in Bouncy Castle could enable a local malicious application to gain access to user's private information. (CVE-2015-6644)\n\n* It was found that while parsing the SAML messages the StaxParserUtil class of Picketlink replaces special strings for obtaining attribute values with system property. This could allow an attacker to determine values of system properties at the attacked system by formatting the SAML request ID field to be the chosen system property which could be obtained in the \"InResponseTo\" field in the response. (CVE-2017-2582)\n\n* It was found that when the security manager's reflective permissions, which allows it to access the private members of the class, are granted to Hibernate Validator, a potential privilege escalation can occur. By allowing the calling code to access those private members without the permission an attacker may be able to validate an invalid instance and access the private member value via ConstraintViolation#getInvalidValue(). (CVE-2017-7536)\n\nThe CVE-2017-2582 issue was discovered by Hynek Mlnarik (Red Hat) and the CVE-2017-7536 issue was discovered by Gunnar Morling (Red Hat).",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2017:2808"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9970"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-6644"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-2582"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-5645"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7536"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1410481"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1443635"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1444015"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1455566"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1465573"
+					}
+				],
+				"published": "2017-09-26T00:00:00Z",
+				"modified": "2017-09-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2014-9970",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.1,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.1,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.1,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-385"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9970"
+					}
+				],
+				"published": "2017-02-20T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-6644",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-200"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-6644"
+					}
+				],
+				"published": "2016-01-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-2582",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-201"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-2582"
+					}
+				],
+				"published": "2017-09-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-5645",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.1,
+							"base_severity": "HIGH",
+							"temporal_score": 8.1,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.1,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-502"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-5645"
+					}
+				],
+				"published": "2017-04-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-7536",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:N",
+							"base_score": 6.3,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.3,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.3,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7536"
+					}
+				],
+				"published": "2017-09-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-artemis-native",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.0-13.redhat_4.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.1.0-13.redhat_4.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-artemis-native-wildfly",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.0-13.redhat_4.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.1.0-13.redhat_4.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-bouncycastle",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.56.0-3.redhat_2.2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.56.0-3.redhat_2.2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-bouncycastle-mail",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.56.0-3.redhat_2.2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.56.0-3.redhat_2.2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-bouncycastle-pkix",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.56.0-3.redhat_2.2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.56.0-3.redhat_2.2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-bouncycastle-prov",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.56.0-3.redhat_2.2.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.56.0-3.redhat_2.2.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-hibernate-validator",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.5-2.Final_redhat_2.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:5.2.5-2.Final_redhat_2.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-hibernate-validator-cdi",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.2.5-2.Final_redhat_2.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:5.2.5-2.Final_redhat_2.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jasypt",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.9.2-2.redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.9.2-2.redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-jms-api_2.0_spec",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.0.1-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-logmanager",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.0.7-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.0.7-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata-appclient",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata-common",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata-ear",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata-ejb",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-metadata-web",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:10.0.2-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-remote-naming",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.0.5-1.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.0.5-1.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-jboss-remoting",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.0.24-1.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:4.0.24-1.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-log4j-jboss-logmanager",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.4-2.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.1.4-2.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-api",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-bindings",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-common",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-config",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-federation",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-idm-api",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-idm-impl",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-idm-simple-schema",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-impl",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-picketlink-wildfly8",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:2.5.5-9.SP8_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-undertow",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.3.31-1.Final_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:1.3.31-1.Final_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-wildfly",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.8-4.GA_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:7.0.8-4.GA_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-wildfly-javadocs",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.8-1.GA_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:7.0.8-1.GA_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "eap7-wildfly-modules",
+												"repositories": [
+													"jb-eap-7-for-rhel-7-server-debug-rpms",
+													"jb-eap-7-for-rhel-7-server-rpms",
+													"jb-eap-7-for-rhel-7-server-source-rpms",
+													"jb-eap-7.0-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.0-for-rhel-7-server-rpms",
+													"jb-eap-7.0-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.1-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.1-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.1-for-rhel-7-server-rpms",
+													"jb-eap-7.1-for-rhel-7-server-source-rpms",
+													"jb-eap-7.2-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.2-for-rhel-7-server-rpms",
+													"jb-eap-7.2-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-rpms",
+													"jb-eap-7.3-eus-for-rhel-7-server-source-rpms",
+													"jb-eap-7.3-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.3-for-rhel-7-server-rpms",
+													"jb-eap-7.3-for-rhel-7-server-source-rpms",
+													"jb-eap-7.4-for-rhel-7-server-debug-rpms",
+													"jb-eap-7.4-for-rhel-7-server-rpms",
+													"jb-eap-7.4-for-rhel-7-server-source-rpms",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_1-eus-for-rhel-7-server-source-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-debug-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-rpms__x86_64",
+													"jb-eap-7_DOT_3-eus-for-rhel-7-server-source-rpms__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.8-4.GA_redhat_1.1.ep7.el7"
+													}
+												],
+												"fixed": [
+													"0:7.0.8-4.GA_redhat_1.1.ep7.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-eap-7"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/definitions/oval:com.redhat.rhsa:def:20172808.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839041.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839042.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839043.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839044.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839045.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839046.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839047.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839048.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839049.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839050.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839051.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839070.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839071.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161839072.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20162641009.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170832069.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170832070.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411056.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411057.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411058.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411059.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411060.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411061.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411062.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171411063.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808010.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808024.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808025.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808026.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808027.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808028.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808029.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172808030.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808001.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808004.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808005.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808006.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808007.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808008.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808009.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808010.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808011.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808012.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808013.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808014.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172808015.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839082.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839084.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839086.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839088.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839090.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839092.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839094.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839096.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839098.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839100.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839102.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839140.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839142.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161839144.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20162641018.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170832138.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170832140.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411112.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411114.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411116.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411118.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411120.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411122.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411124.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171411126.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808001.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808005.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808006.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808007.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808009.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808011.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808013.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808015.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808017.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808019.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808020.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808021.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808023.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808025.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808027.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808029.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808031.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808033.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808035.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808037.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808039.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808041.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808043.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808045.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808047.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808048.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808049.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808050.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808051.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808052.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808053.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808054.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808055.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808056.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808057.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808058.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808059.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808060.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808061.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808063.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808065.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172808067.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332003.json",
+			"vuls-data-raw-redhat-ovalv2/7/jboss-eap-7/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161332004.json"
+		]
+	}
+}

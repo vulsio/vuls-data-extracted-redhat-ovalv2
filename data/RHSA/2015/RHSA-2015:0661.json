@@ -1,0 +1,891 @@
+{
+	"id": "RHSA-2015:0661",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2015:0661",
+				"title": "RHSA-2015:0661: qpid-cpp security and bug fix update (Moderate)",
+				"description": "Red Hat Enterprise MRG (Messaging, Realtime, and Grid) is a next-generation\nIT infrastructure for enterprise computing. MRG offers increased\nperformance, reliability, interoperability, and faster computing for\nenterprise customers.\n\nThe Qpid packages provide a message broker daemon that receives, stores and\nroutes messages using the open AMQP messaging protocol along with run-time\nlibraries for AMQP client applications developed using Qpid C++. Clients\nexchange messages with an AMQP message broker using the AMQP protocol.\n\nIt was discovered that the Qpid daemon (qpidd) did not restrict access to\nanonymous users when the ANONYMOUS mechanism was disallowed.\n(CVE-2015-0223)\n\nMultiple flaws were found in the way the Qpid daemon (qpidd) processed\ncertain protocol sequences. An unauthenticated attacker able to send a\nspecially crafted protocol sequence set could use these flaws to crash\nqpidd. (CVE-2015-0203, CVE-2015-0224)\n\nRed Hat would like to thank the Apache Software Foundation for reporting\nthe CVE-2015-0203 issue. Upstream acknowledges G. Geshev from MWR Labs as\nthe original reporter.\n\nThis update also fixes the following bug:\n\n* Prior to this update, because message purging was performed on a timer\nthread, large purge events could have caused all other timer tasks to be\ndelayed. Because heartbeats were also driven by a timer on this thread,\nthis could have resulted in clients timing out because they were not\nreceiving heartbeats. The fix moves expired message purging from the timer\nthread to a worker thread, which allow long-running expired message purges\nto not affect timer tasks such as the heartbeat timer. (BZ#1142833)\n\nAll users of Red Hat Enterprise MRG Messaging 2.5 for Red Hat Enterprise\nLinux 6 are advised to upgrade to these updated packages, which correct\nthese issues.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2015:0661"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0203"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0223"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0224"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1181721"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1186302"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1186308"
+					}
+				],
+				"published": "2015-03-09T00:00:00Z",
+				"modified": "2015-03-09T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2015-0203",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 2.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0203"
+					}
+				],
+				"published": "2015-01-13T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-0223",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:L/Au:N/C:P/I:P/A:P",
+							"base_score": 5.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0223"
+					}
+				],
+				"published": "2015-01-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-0224",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:A/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 2.9,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.9,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.9,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0224"
+					}
+				],
+				"published": "2015-01-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-client",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-client-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-client-devel-docs",
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-client-rdma",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-client-ssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-cluster",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-rdma",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-ssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-store",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "qpid-cpp-server-xml",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-hpc-node-mrg-grid-execute-debug-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-rpms",
+													"rhel-6-hpc-node-mrg-grid-execute-source-rpms",
+													"rhel-6-hpc-node-mrg-management-debug-rpms",
+													"rhel-6-hpc-node-mrg-management-rpms",
+													"rhel-6-hpc-node-mrg-management-source-rpms",
+													"rhel-6-server-mrg-grid-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-debug-rpms",
+													"rhel-6-server-mrg-grid-execute-rpms",
+													"rhel-6-server-mrg-grid-execute-source-rpms",
+													"rhel-6-server-mrg-grid-rpms",
+													"rhel-6-server-mrg-grid-source-rpms",
+													"rhel-6-server-mrg-management-debug-rpms",
+													"rhel-6-server-mrg-management-rpms",
+													"rhel-6-server-mrg-management-source-rpms",
+													"rhel-6-server-mrg-messaging-2-debug-rpms",
+													"rhel-6-server-mrg-messaging-2-rpms",
+													"rhel-6-server-mrg-messaging-2-source-rpms",
+													"rhel-6-server-realtime-debug-rpms",
+													"rhel-6-server-realtime-rpms",
+													"rhel-6-server-realtime-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.18-38.el6"
+													}
+												],
+												"fixed": [
+													"0:0.18-38.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "mrg-2"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/definitions/oval:com.redhat.rhsa:def:20150661.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528014.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528015.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528016.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528017.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528018.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528019.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528020.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20120528021.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121279011.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121279015.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121279016.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20121279020.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150661001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150661003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528028.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528030.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528032.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528034.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528036.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528038.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528040.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20120528042.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121279022.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121279030.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121279032.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20121279040.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661001.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661003.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661005.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661007.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661009.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661011.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661013.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661015.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661017.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661019.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661021.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150661023.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496021.json",
+			"vuls-data-raw-redhat-ovalv2/6/mrg-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20120496022.json"
+		]
+	}
+}

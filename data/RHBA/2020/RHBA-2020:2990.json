@@ -1,0 +1,2434 @@
+{
+	"id": "RHBA-2020:2990",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHBA-2020:2990",
+				"title": "RHBA-2020:2990: OpenShift Container Platform 3.11.248 bug fix and enhancement update (Moderate)",
+				"description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 3.11.248. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHBA-2020:2991\n\nThis release fixes the following bugs among others:\n\n* Previously, the egress IP tracker had methods that locked `eit.mutex` and had methods that called EVM functions that locked `evm.mutex`. Because `evm.mutex` had to write to the `evm.updates` channel, which was not buffered and was blocked until `eit.setNodeOffline ran, this function also locked `eit.mutex`. This caused a deadlock when there was a large amount of egress IPs. This bug fix removes the deadlock by buffering the updates channel so that it only serves as a notification system rather than containing actual data. (BZ#1824243)\n\n* Previously, the conditional set on a task checking the `openshift_master_cluster_hostname` variable expected the `masters` group in the inventory to be set. This caused the `masters` group to fail if it was not defined. This bug fix adds a conditional to check if `masters` is defined; if `masters` is not defined, the task is skipped instead of failing on an undefined variable. (BZ#1828484)\n\n* Previously, when providing a custom `openshift_node_groups` list, not a ConfigMaps were created. This was caused by new ConfigMap creation code that only created ConfigMaps if they were assigned to an active host. This code has been reverted, so all ConfigMaps specified in a `openshift_node_groups` list are created. (BZ#1845676)\n\n* Previously, Prometheus counters that show the number of active sessions were preserved across router restarts and increased indefinitely. With this update, `haproxy_frontend_current_session` and `haproxy_server_current_session` now accurately depict the number of active sessions. The value of these counters are now reset upon router restart. (BZ#1847478)\n\n* Previously, nodes in CI for GCP assigned masters and infra nodes were assigned to the same group. This caused all nodes to be labeled as masters and none as infra nodes. The node group mapping has been changed to allow infra and compute nodes to be assigned to the same group and apply the proper infra and compute labels. Now the CI cluster is built properly with all nodes labeled appropriately. (BZ#1848723)\n\nAll OpenShift Container Platform 3.11 users are advised to upgrade to these\nupdated packages and images.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHBA-2020:2990"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2181"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2182"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1847341"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1847348"
+					}
+				],
+				"published": "2020-07-27T00:00:00Z",
+				"modified": "2020-07-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2020-2181",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 6.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-200"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2181"
+					}
+				],
+				"published": "2020-05-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2020-2182",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+							"base_score": 4.3,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-222"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2182"
+					}
+				],
+				"published": "2020-05-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-enterprise-service-catalog",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.11.248-1.git.1.9aad2ef.el7"
+													}
+												],
+												"fixed": [
+													"1:3.11.248-1.git.1.9aad2ef.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-enterprise-service-catalog-svcat",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.11.248-1.git.1.9aad2ef.el7"
+													}
+												],
+												"fixed": [
+													"1:3.11.248-1.git.1.9aad2ef.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-cluster-autoscaler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.b5530f6.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.b5530f6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-descheduler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.108ef32.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.108ef32.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-dockerregistry",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.bb4a1fc.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.bb4a1fc.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-metrics-server",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.b53e0e3.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.b53e0e3.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-node-problem-detector",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.628ff22.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.628ff22.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-service-idler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.4c42a90.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.4c42a90.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "golang-github-openshift-oauth-proxy",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.9885abb.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.9885abb.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jenkins-2-plugins",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.1593081747-1.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.1593081747-1.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-docs",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-playbooks",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-roles",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-test",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-enterprise-autoheal",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.0020348.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.0020348.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-enterprise-cluster-capacity",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.37b107c.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.37b107c.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-cni",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-common",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-controller",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.ad54f5b.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.ad54f5b.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus-alertmanager",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.66abd18.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.66abd18.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus-node-exporter",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.32f87fc.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.32f87fc.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python2-kuryr-kubernetes",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python2-urllib3",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.24.3-1.el7"
+													}
+												],
+												"fixed": [
+													"0:1.24.3-1.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openshift-3.11"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-enterprise-service-catalog",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.11.248-1.git.1.9aad2ef.el7"
+													}
+												],
+												"fixed": [
+													"1:3.11.248-1.git.1.9aad2ef.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-enterprise-service-catalog-svcat",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.11.248-1.git.1.9aad2ef.el7"
+													}
+												],
+												"fixed": [
+													"1:3.11.248-1.git.1.9aad2ef.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-cluster-autoscaler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.b5530f6.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.b5530f6.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-descheduler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.108ef32.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.108ef32.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-dockerregistry",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.bb4a1fc.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.bb4a1fc.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-metrics-server",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.b53e0e3.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.b53e0e3.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-node-problem-detector",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.628ff22.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.628ff22.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "atomic-openshift-service-idler",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.4c42a90.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.4c42a90.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "golang-github-openshift-oauth-proxy",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.9885abb.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.9885abb.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jenkins-2-plugins",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.1593081747-1.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.1593081747-1.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-docs",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-playbooks",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-roles",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-ansible-test",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.0.fd212c7.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.0.fd212c7.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-enterprise-autoheal",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.0020348.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.0020348.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-enterprise-cluster-capacity",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.37b107c.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.37b107c.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-cni",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-common",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openshift-kuryr-controller",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.ad54f5b.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.ad54f5b.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus-alertmanager",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.66abd18.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.66abd18.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "prometheus-node-exporter",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.32f87fc.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.32f87fc.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python2-kuryr-kubernetes",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.11.248-1.git.1.f90c804.el7"
+													}
+												],
+												"fixed": [
+													"0:3.11.248-1.git.1.f90c804.el7"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python2-urllib3",
+												"repositories": [
+													"rhel-7-for-power-9-ose-3.11-debug-rpms",
+													"rhel-7-for-power-9-ose-3.11-rpms",
+													"rhel-7-for-power-9-ose-3.11-source-rpms",
+													"rhel-7-for-power-le-ose-3.11-debug-rpms",
+													"rhel-7-for-power-le-ose-3.11-rpms",
+													"rhel-7-for-power-le-ose-3.11-source-rpms",
+													"rhel-7-server-ose-3.11-debug-rpms",
+													"rhel-7-server-ose-3.11-rpms",
+													"rhel-7-server-ose-3.11-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.24.3-1.el7"
+													}
+												],
+												"fixed": [
+													"0:1.24.3-1.el7"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/definitions/oval:com.redhat.rhba:def:20202990.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20181000411001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201820060002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276039.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276046.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276048.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276049.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276050.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276061.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20213114012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20213114013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20213114023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20213114040.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743036.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743037.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743038.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743039.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20181000411002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201820060004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276030.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276056.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276058.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276060.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276078.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276092.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276096.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276098.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276100.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276122.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20213114024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20213114026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20213114046.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20213114080.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743070.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743072.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743074.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743076.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743078.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990033.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990037.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990039.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990041.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990043.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990045.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990047.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990049.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/definitions/oval:com.redhat.rhba:def:20202990.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743020.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743026.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743028.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743036.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743037.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743038.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743039.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20200402017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20200402018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20200402019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20200402020.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20202990024.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990008.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990010.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990012.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990014.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202990018.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743036.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743038.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743040.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743042.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743048.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743050.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743052.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743054.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743056.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743062.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743064.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743070.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743072.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743074.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743076.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743078.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20200402034.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20200402036.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20200402038.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20200402040.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990007.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990009.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990011.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990015.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990017.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990019.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990021.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990023.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990025.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990031.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990033.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990035.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990037.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990039.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990041.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990043.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990045.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990047.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990048.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202990049.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652028.json"
+		]
+	}
+}

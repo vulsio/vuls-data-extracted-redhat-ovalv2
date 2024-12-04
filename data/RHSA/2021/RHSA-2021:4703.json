@@ -1,0 +1,530 @@
+{
+	"id": "RHSA-2021:4703",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2021:4703",
+				"title": "RHSA-2021:4703: RHV Engine and Host Common Packages security update [ovirt-4.4.9] (Important)",
+				"description": "The ovirt-engine package provides the Red Hat Virtualization Manager, a centralized management platform that allows system administrators to view and manage virtual machines. The Manager provides a comprehensive range of features including search capabilities, resource management, live migrations, and virtual infrastructure provisioning.\n\nThe ovirt.ovirt package (previously ovirt-ansible-collection) manages all oVirt Ansible modules.\n\nThe ovirt-ansible-hosted-engine-setup package provides an Ansible role for deploying Red Hat Virtualization Hosted-Engine.\n\notopi is a standalone, plug-in based installation framework to be used to set up system components. The plug-in nature provides simplicity to add new installation functionality without the complexity of the state and transaction management.\n\nSecurity Fix(es):\n\n* Ansible: ansible-connection module discloses sensitive info in traceback error message (CVE-2021-3620)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\n Bug Fix(es):\n\n* A playbook executed by Ansible Engine 2.9.25 inside a virtual machine running on Red Hat Virtualization 4.4.9 correctly detects that this is a virtual machine running on Red Hat Virtualization by using Ansible facts. (BZ#1904085)\n\n* Red Hat Virtualization now supports Ansible-2.9.27 for internal usage. (BZ#2003671)\n\n* Previously, upgrading from Red Hat Virtualization 4.3 failed when using an isolated network during IPv6 deployment. In this release, a forward network is used instead of an isolated network during an IPv6 deployment. As a result, upgrade from Red Hat Virtualization 4.3 using IPv6 now succeeds. (BZ#1947709)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2021:4703"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-3620"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1975767"
+					}
+				],
+				"published": "2021-11-16T00:00:00Z",
+				"modified": "2021-11-16T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2021-3620",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.5,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.5,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.5,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-209"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-3620"
+					}
+				],
+				"published": "2021-06-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvm-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:8",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ansible",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.27-1.el8ae"
+													}
+												],
+												"fixed": [
+													"0:2.9.27-1.el8ae"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-ansible-collection",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.6.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvm-4"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ansible",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.27-1.el8ae"
+													}
+												],
+												"fixed": [
+													"0:2.9.27-1.el8ae"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-ansible-collection",
+												"repositories": [
+													"rhv-4.4-manager-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-rpms",
+													"rhv-4.4-manager-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.6.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvm-4-including-unpatched"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ansible",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.27-1.el8ae"
+													}
+												],
+												"fixed": [
+													"0:2.9.27-1.el8ae"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-ansible-collection",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.6.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ansible",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.27-1.el8ae"
+													}
+												],
+												"fixed": [
+													"0:2.9.27-1.el8ae"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ovirt-ansible-collection",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.5-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:1.6.5-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20214703.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20212180001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20214703002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20212180002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/definitions/oval:com.redhat.rhsa:def:20214703.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20212180001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20214703002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20212180002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20214703.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20212180001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20214703002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20205179001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20212180002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20166341003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20166341004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247050.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/definitions/oval:com.redhat.rhsa:def:20214703.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20212180001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20214703002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20205179001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20212180002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20214703004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247049.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247050.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvm-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20203247051.json"
+		]
+	}
+}

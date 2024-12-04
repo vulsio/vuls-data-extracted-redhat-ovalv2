@@ -1,0 +1,2115 @@
+{
+	"id": "RHSA-2022:4764",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2022:4764",
+				"title": "RHSA-2022:4764: RHV RHEL Host (ovirt-host) [ovirt-4.5.0] security update (Low)",
+				"description": "The ovirt-host package consolidates host package requirements into a single meta package.\n\nSecurity Fix(es) from Bugzilla:\n\n* vdsm: disclosure of sensitive values in log files (CVE-2022-0207)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es) from Bugzilla:\n\n* With this release, RHV 4.4 SP1 has been upgraded to use ansible-core in cockpit-ovirt. (BZ#2066042)\n\n* Rebase package(s) to version: 0.16.0\n\nHighlights and notable enhancements:  https://github.com/oVirt/cockpit-ovirt/releases/tag/cockpit-ovirt-0.16.0 (BZ#2067078)\n\n* Rebase package(s) to version: 0.6.2 (BZ#2060889)\n\n* Rebase package(s) to version: 4.5.0\n\nHighlights, important fixes, or notable enhancements: (BZ#2054733)\n\n* Feature: Include the package nvme-cli on virtualization hosts\n\nReason: The package is requested in RHEL 8 Managing Storage devices, Chapter 15. NVMe over fabrics using FC for accessing that hardware\n\nResult: the needed package is available on the host. (BZ#2058177)\n\n* Previously, the ovirt-ha-broker service failed to start on a host with a DISA STIG profile.\nIn this release, the ovirt-ha-broker binaries were moved to /usr/libexec. As a result, the ovirt-ha-broker service succeeds to start on a host with a DISA STIG profile. (BZ#2050108)\n\n* Previously, during self-hosted engine deployment, the tpgt value was not used in the iSCSI login, creating duplicate iSCSI sessions.\nIN this release, the tpgt value is used in the iSCSI login, and no duplicate iSCSI sessions are created. (BZ#1768969)\n\n* With this release, the self-hosted engine installation supports selecting either DISA STIG or PCI-DSS security profiles for the self-hosted engine VM. (BZ#2029830)\n\n* Red Hat Virtualization 4.4 SP1 now requires ansible-core >= 2.12.0 to execute Ansible playbooks/roles internally from RHV components. (BZ#2052686)\n\n* Rebase package(s) to version: 2.6.1\n\nHighlights, important fixes, or notable enhancements: (BZ#2050512)\n\n* RHV Hypervisor 4.4 SP1, with exception to RHV-H, is able to run on a host with RHEL 8.6 DISA STIG openscap profile applied. (BZ#2015802)\n\n* Previously, SCSI reservation was not set for disks that are hot-plugged.\nIn this release, the SCSI reservation works for disks that are being hot-plugged. (BZ#2028481)\n\n* The Red Hat Virtualization Host is now capable of running on a machine with the PCI-DSS security profile. (BZ#2030226)\n\n* Previously, if storage problems occurred and disappeared during a VM migration attempt, it sometimes led to the VM being paused and not resuming even if the VM had an auto-resume policy set. \nIn this release, the VM is handled according to its resume behavior policy when the storage state changes during a VM migration attempt. (BZ#2010478)\n\n* Previously, the VDSM used UDEV links to create the LVM filter. As a result, the LVM sometimes grabbed SCSI devices during the boot process by mistake.\nIn this release, the  LVM does not not try to grab SCSI devices during the boot process, only using the multipath device specified in the LVM filter. (BZ#2016173)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Low"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2022:4764"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-0207"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2039248"
+					}
+				],
+				"published": "2022-05-26T00:00:00Z",
+				"modified": "2022-05-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2022-0207",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+							"base_score": 3.8,
+							"base_severity": "LOW",
+							"temporal_score": 3.8,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.8,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-362"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-0207"
+					}
+				]
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:8",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-api",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-client",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-common",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-gluster",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-checkips",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-cpuflags",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-ethtool-options",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-extra-ipv4-addrs",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-fcoe",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-localdisk",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-nestedvt",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-openstacknet",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-vhostmd",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-http",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-jsonrpc",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-network",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-python",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-yajsonrpc",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-api",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-client",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-common",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-gluster",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-checkips",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-cpuflags",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-ethtool-options",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-extra-ipv4-addrs",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-fcoe",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-localdisk",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-nestedvt",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-openstacknet",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-hook-vhostmd",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-http",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-jsonrpc",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-network",
+												"architectures": [
+													"ppc64le",
+													"x86_64"
+												],
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-python",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "vdsm-yajsonrpc",
+												"repositories": [
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+													"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+													"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-rpms",
+													"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-rpms",
+													"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+													"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+													"rhvh-4-for-rhel-8-x86_64-rpms",
+													"rhvh-4-for-rhel-8-x86_64-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.50.0.13-1.el8ev"
+													}
+												],
+												"fixed": [
+													"0:4.50.0.13-1.el8ev"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20224764.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764020.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764021.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764022.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764023.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764024.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764025.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764026.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764027.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764028.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764029.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764030.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764031.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764032.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764033.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764034.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764035.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764036.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764037.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764038.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/definitions/oval:com.redhat.rhsa:def:20224764.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20224764019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764005.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764006.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764007.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764008.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764009.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764010.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764011.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764012.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764015.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764016.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764017.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764018.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764019.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764020.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764021.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764022.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764023.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764024.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764025.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764026.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764027.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764028.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764029.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764030.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764031.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764032.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764033.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764034.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764035.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764036.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764037.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224764038.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172005.json"
+		]
+	}
+}

@@ -1,0 +1,1285 @@
+{
+	"id": "RHSA-2015:0104",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2015:0104",
+				"title": "RHSA-2015:0104: ntp security update (Important)",
+				"description": "The Network Time Protocol (NTP) is used to synchronize a computer's time\nwith a referenced time source.\n\nMultiple buffer overflow flaws were discovered in ntpd's crypto_recv(),\nctl_putdata(), and configure() functions. A remote attacker could use\neither of these flaws to send a specially crafted request packet that could\ncrash ntpd or, potentially, execute arbitrary code with the privileges of\nthe ntp user. Note: the crypto_recv() flaw requires non-default\nconfigurations to be active, while the ctl_putdata() flaw, by default, can\nonly be exploited via local attackers, and the configure() flaw requires\nadditional authentication to exploit. (CVE-2014-9295)\n\nIt was found that ntpd automatically generated weak keys for its internal\nuse if no ntpdc request authentication key was specified in the ntp.conf\nconfiguration file. A remote attacker able to match the configured IP\nrestrictions could guess the generated key, and possibly use it to send\nntpdc query or configuration requests. (CVE-2014-9293)\n\nIt was found that ntp-keygen used a weak method for generating MD5 keys.\nThis could possibly allow an attacker to guess generated MD5 keys that\ncould then be used to spoof an NTP client or server. Note: it is\nrecommended to regenerate any MD5 keys that had explicitly been generated\nwith ntp-keygen; the default installation does not contain such keys.\n(CVE-2014-9294)\n\nA missing return statement in the receive() function could potentially\nallow a remote attacker to bypass NTP's authentication mechanism.\n(CVE-2014-9296)\n\nAll ntp users are advised to upgrade to this updated package, which\ncontains backported patches to resolve these issues. After installing the\nupdate, the ntpd daemon will restart automatically.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2015:0104"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9293"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9294"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9295"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9296"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1176032"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1176035"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1176037"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1176040"
+					}
+				],
+				"published": "2015-01-28T00:00:00Z",
+				"modified": "2015-01-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-eus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-tus"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2014-9293",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:N/C:P/I:P/A:N",
+							"base_score": 4,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-338"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9293"
+					}
+				],
+				"published": "2014-12-19T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-eus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-tus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-9294",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:N/C:P/I:P/A:N",
+							"base_score": 4,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"(CWE-335|CWE-338)"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9294"
+					}
+				],
+				"published": "2014-12-19T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-eus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-tus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-9295",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-119"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9295"
+					}
+				],
+				"published": "2014-12-19T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-eus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-tus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-9296",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-390"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-9296"
+					}
+				],
+				"published": "2014-12-19T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-eus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-tus"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-tus-debug-rpms",
+													"rhel-6-server-tus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-debug-rpms",
+													"rhel-6-server-tus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-rpms",
+													"rhel-6-server-tus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-source-rpms",
+													"rhel-6-server-tus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-rpms",
+													"rhel-6-server-tus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-source-rpms",
+													"rhel-6-server-tus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-doc",
+												"repositories": [
+													"rhel-6-server-tus-debug-rpms",
+													"rhel-6-server-tus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-debug-rpms",
+													"rhel-6-server-tus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-rpms",
+													"rhel-6-server-tus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-source-rpms",
+													"rhel-6-server-tus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-rpms",
+													"rhel-6-server-tus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-source-rpms",
+													"rhel-6-server-tus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-perl",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-tus-debug-rpms",
+													"rhel-6-server-tus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-debug-rpms",
+													"rhel-6-server-tus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-rpms",
+													"rhel-6-server-tus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-source-rpms",
+													"rhel-6-server-tus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-rpms",
+													"rhel-6-server-tus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-source-rpms",
+													"rhel-6-server-tus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntpdate",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-tus-debug-rpms",
+													"rhel-6-server-tus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-debug-rpms",
+													"rhel-6-server-tus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-rpms",
+													"rhel-6-server-tus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-optional-source-rpms",
+													"rhel-6-server-tus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-rpms",
+													"rhel-6-server-tus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-tus-source-rpms",
+													"rhel-6-server-tus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.5-tus"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-doc",
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-perl",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntpdate",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-for-power-eus-debug-rpms",
+													"rhel-6-for-power-eus-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-debug-rpms",
+													"rhel-6-for-power-eus-optional-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-rpms",
+													"rhel-6-for-power-eus-optional-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-source-rpms",
+													"rhel-6-for-power-eus-optional-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-rpms",
+													"rhel-6-for-power-eus-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-source-rpms",
+													"rhel-6-for-power-eus-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-system-z-eus-debug-rpms",
+													"rhel-6-for-system-z-eus-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-debug-rpms",
+													"rhel-6-for-system-z-eus-optional-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-rpms",
+													"rhel-6-for-system-z-eus-optional-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-source-rpms",
+													"rhel-6-for-system-z-eus-optional-source-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-rpms",
+													"rhel-6-for-system-z-eus-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-source-rpms",
+													"rhel-6-for-system-z-eus-source-rpms__6_DOT_5__s390x",
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-eus-debug-rpms",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-debug-rpms",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-rpms",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-source-rpms",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-rpms",
+													"rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-source-rpms",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-rpms",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-debug-rpms",
+													"rhel-hpc-node-6-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-debug-rpms",
+													"rhel-hpc-node-6-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-rpms",
+													"rhel-hpc-node-6-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-source-rpms",
+													"rhel-hpc-node-6-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-rpms",
+													"rhel-hpc-node-6-eus-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-rpms",
+													"rhel-hpc-node-6-eus-sfs-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-source-rpms",
+													"rhel-hpc-node-6-eus-sfs-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-source-rpms",
+													"rhel-hpc-node-6-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-rpms",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-rpms",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-doc",
+												"repositories": [
+													"rhel-6-for-power-eus-debug-rpms",
+													"rhel-6-for-power-eus-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-debug-rpms",
+													"rhel-6-for-power-eus-optional-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-rpms",
+													"rhel-6-for-power-eus-optional-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-source-rpms",
+													"rhel-6-for-power-eus-optional-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-rpms",
+													"rhel-6-for-power-eus-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-source-rpms",
+													"rhel-6-for-power-eus-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-system-z-eus-debug-rpms",
+													"rhel-6-for-system-z-eus-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-debug-rpms",
+													"rhel-6-for-system-z-eus-optional-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-rpms",
+													"rhel-6-for-system-z-eus-optional-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-source-rpms",
+													"rhel-6-for-system-z-eus-optional-source-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-rpms",
+													"rhel-6-for-system-z-eus-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-source-rpms",
+													"rhel-6-for-system-z-eus-source-rpms__6_DOT_5__s390x",
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-eus-debug-rpms",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-debug-rpms",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-rpms",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-source-rpms",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-rpms",
+													"rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-source-rpms",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-rpms",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-debug-rpms",
+													"rhel-hpc-node-6-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-debug-rpms",
+													"rhel-hpc-node-6-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-rpms",
+													"rhel-hpc-node-6-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-source-rpms",
+													"rhel-hpc-node-6-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-rpms",
+													"rhel-hpc-node-6-eus-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-rpms",
+													"rhel-hpc-node-6-eus-sfs-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-source-rpms",
+													"rhel-hpc-node-6-eus-sfs-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-source-rpms",
+													"rhel-hpc-node-6-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-rpms",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-rpms",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntp-perl",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-for-power-eus-debug-rpms",
+													"rhel-6-for-power-eus-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-debug-rpms",
+													"rhel-6-for-power-eus-optional-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-rpms",
+													"rhel-6-for-power-eus-optional-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-source-rpms",
+													"rhel-6-for-power-eus-optional-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-rpms",
+													"rhel-6-for-power-eus-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-source-rpms",
+													"rhel-6-for-power-eus-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-system-z-eus-debug-rpms",
+													"rhel-6-for-system-z-eus-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-debug-rpms",
+													"rhel-6-for-system-z-eus-optional-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-rpms",
+													"rhel-6-for-system-z-eus-optional-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-source-rpms",
+													"rhel-6-for-system-z-eus-optional-source-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-rpms",
+													"rhel-6-for-system-z-eus-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-source-rpms",
+													"rhel-6-for-system-z-eus-source-rpms__6_DOT_5__s390x",
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-eus-debug-rpms",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-debug-rpms",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-rpms",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-source-rpms",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-rpms",
+													"rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-source-rpms",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-rpms",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-debug-rpms",
+													"rhel-hpc-node-6-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-debug-rpms",
+													"rhel-hpc-node-6-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-rpms",
+													"rhel-hpc-node-6-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-source-rpms",
+													"rhel-hpc-node-6-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-rpms",
+													"rhel-hpc-node-6-eus-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-rpms",
+													"rhel-hpc-node-6-eus-sfs-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-source-rpms",
+													"rhel-hpc-node-6-eus-sfs-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-source-rpms",
+													"rhel-hpc-node-6-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-rpms",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-rpms",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ntpdate",
+												"architectures": [
+													"i686",
+													"ppc64",
+													"s390x",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-for-power-eus-debug-rpms",
+													"rhel-6-for-power-eus-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-debug-rpms",
+													"rhel-6-for-power-eus-optional-debug-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-rpms",
+													"rhel-6-for-power-eus-optional-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-optional-source-rpms",
+													"rhel-6-for-power-eus-optional-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-rpms",
+													"rhel-6-for-power-eus-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-power-eus-source-rpms",
+													"rhel-6-for-power-eus-source-rpms__6_DOT_5__ppc64",
+													"rhel-6-for-system-z-eus-debug-rpms",
+													"rhel-6-for-system-z-eus-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-debug-rpms",
+													"rhel-6-for-system-z-eus-optional-debug-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-rpms",
+													"rhel-6-for-system-z-eus-optional-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-optional-source-rpms",
+													"rhel-6-for-system-z-eus-optional-source-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-rpms",
+													"rhel-6-for-system-z-eus-rpms__6_DOT_5__s390x",
+													"rhel-6-for-system-z-eus-source-rpms",
+													"rhel-6-for-system-z-eus-source-rpms__6_DOT_5__s390x",
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-eus-debug-rpms",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-debug-rpms",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-rpms",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-optional-source-rpms",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-rpms",
+													"rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-eus-source-rpms",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-rpms",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-ha-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-debug-rpms",
+													"rhel-hpc-node-6-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-debug-rpms",
+													"rhel-hpc-node-6-eus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-rpms",
+													"rhel-hpc-node-6-eus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-optional-source-rpms",
+													"rhel-hpc-node-6-eus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-rpms",
+													"rhel-hpc-node-6-eus-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms",
+													"rhel-hpc-node-6-eus-sfs-debug-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-rpms",
+													"rhel-hpc-node-6-eus-sfs-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-sfs-source-rpms",
+													"rhel-hpc-node-6-eus-sfs-source-rpms__6_DOT_5__x86_64",
+													"rhel-hpc-node-6-eus-source-rpms",
+													"rhel-hpc-node-6-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-rpms",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-lb-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-rpms",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__i386",
+													"rhel-rs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-rpms__6_DOT_5__x86_64",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms",
+													"rhel-sfs-for-rhel-6-server-eus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.6p5-2.el6_5"
+													}
+												],
+												"fixed": [
+													"0:4.2.6p5-2.el6_5"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.5-eus"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/definitions/oval:com.redhat.rhsa:def:20150104.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/definitions/oval:com.redhat.rhsa:def:20150104.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-eus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/definitions/oval:com.redhat.rhsa:def:20150104.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20150104008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-tus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json"
+		]
+	}
+}

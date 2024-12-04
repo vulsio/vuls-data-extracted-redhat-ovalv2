@@ -1,0 +1,440 @@
+{
+	"id": "RHSA-2019:0917",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2019:0917",
+				"title": "RHSA-2019:0917: openstack-cinder security and bug fix update (Moderate)",
+				"description": "OpenStack Block Storage (cinder) manages block storage mounting and the presentation of such mounted block storage to instances. The backend physical storage can consist of local disks, or Fibre Channel, iSCSI, and NFS mounts attached to Compute nodes. In addition, Block Storage supports volume backups, and snapshots for temporary save and restore operations. Programmatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* openstack-cinder: Data retained after deletion of a ScaleIO volume (CVE-2017-15139)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, image operations in cinder failed due to file I/O issues.\n\nWith this update, you can create volumes from an image in cinder without file I/O issues. (BZ#1476213)\n\n* Previously, the cinder logs contained fixed_key value.\n\nWith this update, the fixed_key value is not logged. (BZ#1655742)\n\n* Previously, it was not possible to attach a volume on the host due to an issue with 3PAR driver and Fibre Channel World Wide Name. \n\nWith this update, you can attach Fibre Channel volumes even with a wrong host configuration at the backend. (BZ#1667997)\n\n* Previously, only admin users could set the Volume Type in the glance image using cinder_img_vol_type custom property.\n\nWith this update, non-admin users can also set the Volume Type in a glance image. (BZ#1671260)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2019:0917"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15139"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1599899"
+					}
+				],
+				"published": "2019-04-30T00:00:00Z",
+				"modified": "2019-04-30T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-15139",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
+							"base_score": 4.8,
+							"base_severity": "MEDIUM",
+							"temporal_score": 4.8,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 4.8,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-200"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-15139"
+					}
+				],
+				"published": "2018-07-10T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "python-cinder-tests",
+												"repositories": [
+													"rhel-7-desktop-openstack-10-tools-debug-rpms",
+													"rhel-7-desktop-openstack-10-tools-rpms",
+													"rhel-7-desktop-openstack-10-tools-source-rpms",
+													"rhel-7-server-openstack-10-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-debug-rpms",
+													"rhel-7-server-openstack-10-devtools-rpms",
+													"rhel-7-server-openstack-10-devtools-source-rpms",
+													"rhel-7-server-openstack-10-optools-debug-rpms",
+													"rhel-7-server-openstack-10-optools-rpms",
+													"rhel-7-server-openstack-10-optools-source-rpms",
+													"rhel-7-server-openstack-10-rpms",
+													"rhel-7-server-openstack-10-source-rpms",
+													"rhel-7-server-openstack-10-tools-debug-rpms",
+													"rhel-7-server-openstack-10-tools-rpms",
+													"rhel-7-server-openstack-10-tools-source-rpms",
+													"rhel-7-workstation-openstack-10-tools-debug-rpms",
+													"rhel-7-workstation-openstack-10-tools-rpms",
+													"rhel-7-workstation-openstack-10-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:9.1.4-50.el7ost"
+													}
+												],
+												"fixed": [
+													"1:9.1.4-50.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-10-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/definitions/oval:com.redhat.rhsa:def:20190917.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202010755001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202010755002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202010755003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20190917001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202010755002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202010755004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202010755006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20115034004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/definitions/oval:com.redhat.rhsa:def:20190917.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20190917001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20190917002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20190917003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/states/rpminfo_state/oval:com.redhat.rhsa:ste:20190917001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20190917006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-10/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20170025004.json"
+		]
+	}
+}

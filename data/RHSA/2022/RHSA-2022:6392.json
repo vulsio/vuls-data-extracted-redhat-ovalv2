@@ -1,0 +1,228 @@
+{
+	"id": "RHSA-2022:6392",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2022:6392",
+				"title": "RHSA-2022:6392: RHV RHEL Host (ovirt-host) [ovirt-4.5.2] security update (Important)",
+				"description": "The ovirt-host package consolidates host package requirements into a single meta package.\n\nSecurity Fix(es):\n\n* moment: inefficient parsing algorithm resulting in DoS (CVE-2022-31129)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* The hosted-engine-ha binaries have been moved from /usr/share to /usr/libexec. As a result, the hosted-engine --clean-metadata command fails. With this release, you must use the new path for the command to succeed: /usr/libexec/ovirt-hosted-engine-ha/ovirt-ha-agent (BZ#2105781)\n\n* A new warning has been added to the vdsm-tool to protect users from using the unsupported user_friendly_names multipath configuration. The following is an example of the output:\n\n$ vdsm-tool is-configured --module multipath\nWARNING: Invalid configuration: 'user_friendly_names' is enabled in multipath configuration:\n  section1 {\n    key1 value1\n    user_friendly_names yes\n    key2 value2\n  }\n  section2 {\n    user_friendly_names yes\n  }\nThis configuration is not supported and may lead to storage domain corruption. (BZ#1793207)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2022:6392"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-31129"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2105075"
+					}
+				],
+				"published": "2022-09-08T00:00:00Z",
+				"modified": "2022-09-08T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2022-31129",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 7.5,
+							"base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-31129"
+					}
+				],
+				"published": "2022-07-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:8",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "cockpit-ovirt-dashboard",
+										"repositories": [
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-for-rhel-8-x86_64-rpms",
+											"rhvh-4-for-rhel-8-x86_64-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:0.16.2-1.el8ev"
+											}
+										],
+										"fixed": [
+											"0:0.16.2-1.el8ev"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "rhvh-4"
+				},
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "cockpit-ovirt-dashboard",
+										"repositories": [
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-for-rhel-8-x86_64-rpms",
+											"rhvh-4-for-rhel-8-x86_64-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:0.16.2-1.el8ev"
+											}
+										],
+										"fixed": [
+											"0:0.16.2-1.el8ev"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20226392.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20205611001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226392001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20205611002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226392001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/definitions/oval:com.redhat.rhsa:def:20226392.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20205611001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20226392001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20205611002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20226392001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172005.json"
+		]
+	}
+}

@@ -1,0 +1,382 @@
+{
+	"id": "RHBA-2020:2477",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHBA-2020:2477",
+				"title": "RHBA-2020:2477: OpenShift Container Platform 3.11 bug fix and enhancement update (Important)",
+				"description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 3.11.232. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHBA-2020:2434\n\nThis release fixes the following bugs (among others):\n\n* Previously, the DeploymentConfig controller broke the adoption mechanism responsible for indentifying replicated controllers. This caused the `oc replace` command to incorrectly modify existing objects based on the specified configuration file unless the `--force` flag was specified. The adoption mechanism has been fixed and the `oc replace` command now correctly removes dependent objects. (BZ#1686838)\n\n* An Ingress object specifies backends, where each backend specifies a target port name or number on some Service object. The Service's port, in turn, specifies a target port on a Pod object. Similarly to an Ingress backend, a Route object may specify a target port on a Service. When translating an Ingress backend to a Route, the ingress-to-route controller used the Service port's target port for the Route's target port when it should have used the Service port's name or number. This caused the ingress-to-route controller to sometimes produce an invalid Route object. When translating the target port of an Ingress backend to the target port for a Route, the ingress-to-route controller now uses the Service port's name rather than its target port, or omits the target port entirely if it is not needed, as in the case of a Service that has only one port. Ingress objects are now correctly translated to Route objects even if an Ingress backend targets a Service port that has a different name or number from the Service port's target port. (BZ#1763340)\n\nAll OpenShift Container Platform 3.11 users are advised to upgrade to these\nupdated packages and images.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHBA-2020:2477"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2160"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2161"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2162"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2163"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1819190"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1819198"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1819211"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1819222"
+					}
+				],
+				"published": "2020-06-17T00:00:00Z",
+				"modified": "2020-06-17T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2020-2160",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+							"base_score": 8.8,
+							"base_severity": "HIGH",
+							"temporal_score": 8.8,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.8,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-352"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2160"
+					}
+				],
+				"published": "2020-03-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2020-2161",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+							"base_score": 5.4,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.4,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.4,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2161"
+					}
+				],
+				"published": "2020-03-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2020-2162",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+							"base_score": 5.4,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.4,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.4,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2162"
+					}
+				],
+				"published": "2020-03-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2020-2163",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N",
+							"base_score": 5.4,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.4,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.4,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-2163"
+					}
+				],
+				"published": "2020-03-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "jenkins",
+										"repositories": [
+											"rhel-7-for-power-9-ose-3.11-debug-rpms",
+											"rhel-7-for-power-9-ose-3.11-rpms",
+											"rhel-7-for-power-9-ose-3.11-source-rpms",
+											"rhel-7-for-power-le-ose-3.11-debug-rpms",
+											"rhel-7-for-power-le-ose-3.11-rpms",
+											"rhel-7-for-power-le-ose-3.11-source-rpms",
+											"rhel-7-server-ose-3.11-debug-rpms",
+											"rhel-7-server-ose-3.11-rpms",
+											"rhel-7-server-ose-3.11-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:2.222.1.1591351669-1.el7"
+											}
+										],
+										"fixed": [
+											"0:2.222.1.1591351669-1.el7"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "openshift-3.11"
+				},
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "jenkins",
+										"repositories": [
+											"rhel-7-for-power-9-ose-3.11-debug-rpms",
+											"rhel-7-for-power-9-ose-3.11-rpms",
+											"rhel-7-for-power-9-ose-3.11-source-rpms",
+											"rhel-7-for-power-le-ose-3.11-debug-rpms",
+											"rhel-7-for-power-le-ose-3.11-rpms",
+											"rhel-7-for-power-le-ose-3.11-source-rpms",
+											"rhel-7-server-ose-3.11-debug-rpms",
+											"rhel-7-server-ose-3.11-rpms",
+											"rhel-7-server-ose-3.11-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:2.222.1.1591351669-1.el7"
+											}
+										],
+										"fixed": [
+											"0:2.222.1.1591351669-1.el7"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/definitions/oval:com.redhat.rhba:def:20202477.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:202017521001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhba:ste:20202477001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:202017521002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202477001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/definitions/oval:com.redhat.rhba:def:20202477.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743029.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhba:ste:20202477001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743058.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20202477001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652028.json"
+		]
+	}
+}

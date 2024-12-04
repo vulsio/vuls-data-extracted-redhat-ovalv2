@@ -1,0 +1,3808 @@
+{
+	"id": "RHSA-2018:2186",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2018:2186",
+				"title": "RHSA-2018:2186: Red Hat JBoss Core Services Apache HTTP Server 2.4.29 RHEL 6 security update (Moderate)",
+				"description": "This release adds the new Apache HTTP Server 2.4.29 packages that are part\nof the JBoss Core Services offering.\n\nThis release serves as a replacement for Red Hat JBoss Core Services\nApache HTTP Server 2.4.23, and includes bug fixes and enhancements. Refer to the Release Notes for information on the most significant bug fixes,\nenhancements and component upgrades included in this release.\n\nThis release upgrades OpenSSL to version 1.0.2.n\n\nSecurity Fix(es):\n\n*  openssl: Out-of-bounds write caused by unchecked errors in BN_bn2dec() (CVE-2016-2182)\n\n*  openssl: Insufficient TLS session ticket HMAC length checks (CVE-2016-6302)\n\n*  openssl: certificate message OOB reads (CVE-2016-6306)\n\n*  openssl: Carry propagating bug in Montgomery multiplication (CVE-2016-7055)\n\n*  openssl: Truncated packet could crash via OOB read (CVE-2017-3731)\n\n*  openssl: BN_mod_exp may produce incorrect results on x86_64 (CVE-2017-3732)\n\n*  openssl: bn_sqrx8x_internal carry bug on x86_64 (CVE-2017-3736)\n\n*  openssl: Read/write after SSL object in error state (CVE-2017-3737)\n\n*  openssl: rsaz_1024_mul_avx2 overflow bug on x86_64 (CVE-2017-3738)\n\nRed Hat would like to thank the OpenSSL project for reporting CVE-2016-6306 \nand CVE-2016-7055. Upstream acknowledges Shi Lei (Gear Team of Qihoo 360 Inc.) as the original reporter of CVE-2016-6306.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2018:2186"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2182"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-4975"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6302"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6306"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-7055"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3731"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3732"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3736"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3737"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3738"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1367340"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1369855"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1375968"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1377594"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1393929"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1416852"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1416856"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1509169"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1523504"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1523510"
+					}
+				],
+				"published": "2018-07-12T00:00:00Z",
+				"modified": "2018-07-12T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2016-2182",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 6.2,
+							"base_severity": "MEDIUM",
+							"temporal_score": 6.2,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 6.2,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-391"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-2182"
+					}
+				],
+				"published": "2016-08-16T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-4975",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+							"base_score": 3.7,
+							"base_severity": "LOW",
+							"temporal_score": 3.7,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.7,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-113"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-4975"
+					}
+				],
+				"published": "2018-08-14T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-6302",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190->CWE-125"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6302"
+					}
+				],
+				"published": "2016-08-23T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-6306",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:H/Au:N/C:N/I:N/A:P",
+							"base_score": 1.2,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 1.2,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 1.2,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-125"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-6306"
+					}
+				],
+				"published": "2016-09-21T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-7055",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:N/C:N/I:N/A:P",
+							"base_score": 2.6,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.6,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.6,
+							"nvd_environmental_severity": "LOW"
+						}
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+							"base_score": 3.7,
+							"base_severity": "LOW",
+							"temporal_score": 3.7,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.7,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-682"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-7055"
+					}
+				],
+				"published": "2016-10-11T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-3731",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190->CWE-125"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3731"
+					}
+				],
+				"published": "2017-01-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-3732",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3732"
+					}
+				],
+				"published": "2017-01-26T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-3736",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-682"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3736"
+					}
+				],
+				"published": "2017-11-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-3737",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-391"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3737"
+					}
+				],
+				"published": "2017-12-07T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2017-3738",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+							"base_score": 5.9,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.9,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.9,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-3738"
+					}
+				],
+				"published": "2017-12-07T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apache-commons-daemon",
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.0-1.redhat_2.1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.0-1.redhat_2.1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apache-commons-daemon-jsvc",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.1.0-1.redhat_2.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.1.0-1.redhat_2.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.3-14.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.3-14.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.3-14.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.3-14.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-ldap",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-mysql",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-nss",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-odbc",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-pgsql",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-sqlite",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-manual",
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-selinux",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-tools",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_auth_kerb",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.4-36.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:5.4-36.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_bmx",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.9.6-17.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:0.9.6-17.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_cluster-native",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.3.8-1.Final_redhat_2.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.3.8-1.Final_redhat_2.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_jk-ap24",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.43-1.redhat_1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.43-1.redhat_1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_jk-manual",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.43-1.redhat_1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.43-1.redhat_1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_ldap",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_proxy_html",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_rt",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-19.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-19.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_security",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.1-23.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.9.1-23.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_session",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_ssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-nghttp2",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.29.0-8.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.29.0-8.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-nghttp2-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.29.0-8.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.29.0-8.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-libs",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-perl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-static",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-cs"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apache-commons-daemon",
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.0-1.redhat_2.1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.0-1.redhat_2.1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apache-commons-daemon-jsvc",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.1.0-1.redhat_2.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.1.0-1.redhat_2.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.3-14.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.3-14.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.3-14.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.3-14.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-ldap",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-mysql",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-nss",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-odbc",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-pgsql",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-apr-util-sqlite",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-9.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-9.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-manual",
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-selinux",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-httpd-tools",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_auth_kerb",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.4-36.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:5.4-36.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_bmx",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.9.6-17.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:0.9.6-17.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_cluster-native",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.3.8-1.Final_redhat_2.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.3.8-1.Final_redhat_2.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_jk-ap24",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.43-1.redhat_1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.43-1.redhat_1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_jk-manual",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.43-1.redhat_1.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.43-1.redhat_1.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_ldap",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_proxy_html",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_rt",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-19.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-19.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_security",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.9.1-23.GA.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.9.1-23.GA.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_session",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-mod_ssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.4.29-17.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:2.4.29-17.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-nghttp2",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.29.0-8.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.29.0-8.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-nghttp2-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.29.0-8.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"0:1.29.0-8.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-libs",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-perl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jbcs-httpd24-openssl-static",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-coreservices-1-for-rhel-6-for-power-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-rpms",
+													"jb-coreservices-1-for-rhel-6-for-power-source-rpms",
+													"jb-coreservices-1-for-rhel-6-server-debug-rpms",
+													"jb-coreservices-1-for-rhel-6-server-rpms",
+													"jb-coreservices-1-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.2n-11.jbcs.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.2n-11.jbcs.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-cs-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/definitions/oval:com.redhat.rhsa:def:20182186.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201711164001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201712618001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20173735001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186036.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201711164002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201712618002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20173735002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193038.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193054.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186070.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186072.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:201711164003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:201711164004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/definitions/oval:com.redhat.rhsa:def:20182186.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20161851010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20170193028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20182186036.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20161851020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193038.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193054.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20170193056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186070.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182186072.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161851021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-cs/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161851022.json"
+		]
+	}
+}

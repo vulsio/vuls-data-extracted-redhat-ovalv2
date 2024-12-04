@@ -1,0 +1,581 @@
+{
+	"id": "RHSA-2022:4896",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2022:4896",
+				"title": "RHSA-2022:4896: Red Hat Virtualization security, bug fix, and enhancement update [ovirt-4.5.0] (Important)",
+				"description": "The redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nSecurity Fix(es):\n\n* kernel: use-after-free in RDMA listen() (CVE-2021-4028)\n\n* kernel: fget: check that the fd still exists after getting a ref to it (CVE-2021-4083)\n\n* kernel: heap out of bounds write in nf_dup_netdev.c (CVE-2022-25636)\n\n* openssl: Infinite loop in BN_mod_sqrt() reachable when parsing certificates (CVE-2022-0778)\n\n* zlib: A flaw found in zlib when compressing (not decompressing) certain inputs (CVE-2018-25032)\n\n* gzip: arbitrary-file-write vulnerability (CVE-2022-1271)\n\n* rsyslog: Heap-based overflow in TCP syslog server (CVE-2022-24903)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fixes:\n\n* elfutils package has been update within RHV-H Channel to match the same version released in RHEL (BZ#2038081)\n\n* Rebase package(s) to version 1.2.24\nFor highlights, important fixes, or notable enhancements: see bugs in \"Depend On\". (BZ#2057338)\n\n* Rebase package(s) to version: 4.5.0\n\nHighlights, important fixes, or notable enhancements: (BZ#2057342)\n\n* Rebase package(s) to version anaconda-33.16.6.6-1.el8\nFor highlights and important bug fixes: include UI change for blocking installation if root password is not set. (BZ#1899821)\n\n* Red hat Virtualization Host has been rebased on Red Hat Enterprise Linux 8.6 (BZ#1997074)\n\n* Previously, concurrent executions of LV refresh (lvchange) failed. This hindered simultaneous starts of virtual machines that have thin-provisioned disks based on the same disk on a block storage domain.\nIn this release, concurrent execution of LV refresh has been fixed in LVM2. (BZ#2020497)\n\n* Red Hat Virtualization Host has been rebased on latest Ceph 4.3 (BZ#2090138)\n\n* In previous releases systemtap package could have been installed on top of RHV-H from RHV-H channel. With 4.4 SP1 systemtap package installation is not supported anymore (BZ#2052963)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2022:4896"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-25032"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-4028"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-4083"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-0778"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-1271"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-24903"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-25636"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2027201"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2029923"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2056830"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2062202"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2067945"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2073310"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2081353"
+					}
+				],
+				"published": "2022-06-03T00:00:00Z",
+				"modified": "2022-06-03T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2018-25032",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H",
+							"base_score": 8.2,
+							"base_severity": "HIGH",
+							"temporal_score": 8.2,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.2,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-119"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-25032"
+					}
+				],
+				"published": "2018-04-20T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2021-4028",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7,
+							"base_severity": "HIGH",
+							"temporal_score": 7,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-416"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-4028"
+					}
+				],
+				"published": "2021-10-04T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2021-4083",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7.4,
+							"base_severity": "HIGH",
+							"temporal_score": 7.4,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.4,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-362"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2021-4083"
+					}
+				]
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-0778",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 7.5,
+							"base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-835"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-0778"
+					}
+				],
+				"published": "2022-03-15T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-1271",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.8,
+							"base_severity": "HIGH",
+							"temporal_score": 8.8,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.8,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"(CWE-179|CWE-1173)"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-1271"
+					}
+				],
+				"published": "2022-04-07T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-24903",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.1,
+							"base_severity": "HIGH",
+							"temporal_score": 8.1,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.1,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-787"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-24903"
+					}
+				],
+				"published": "2022-05-05T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2022-25636",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 7.8,
+							"base_severity": "HIGH",
+							"temporal_score": 7.8,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.8,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-787"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2022-25636"
+					}
+				],
+				"published": "2022-02-22T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4"
+				},
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:8",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "redhat-virtualization-host-image-update",
+										"architectures": [
+											"x86_64"
+										],
+										"repositories": [
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-for-rhel-8-x86_64-rpms",
+											"rhvh-4-for-rhel-8-x86_64-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:4.5.0-202205291010_8.6"
+											}
+										],
+										"fixed": [
+											"0:4.5.0-202205291010_8.6"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "rhvh-4"
+				},
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "redhat-virtualization-host-image-update",
+										"architectures": [
+											"x86_64"
+										],
+										"repositories": [
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-rpms",
+											"rhv-4-mgmt-agent-for-rhel-8-x86_64-source-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-debug-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-rpms",
+											"rhv-4-tools-for-rhel-8-ppc64le-source-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-debug-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-rpms",
+											"rhv-4-tools-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-rpms",
+											"rhvh-4-build-for-rhel-8-x86_64-source-rpms",
+											"rhvh-4-for-rhel-8-x86_64-debug-rpms",
+											"rhvh-4-for-rhel-8-x86_64-rpms",
+											"rhvh-4-for-rhel-8-x86_64-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:4.5.0-202205291010_8.6"
+											}
+										],
+										"fixed": [
+											"0:4.5.0-202205291010_8.6"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "rhvh-4-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/definitions/oval:com.redhat.rhsa:def:20224896.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20204172001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224896001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204172002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224896001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703013.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:202020703014.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/definitions/oval:com.redhat.rhsa:def:20224896.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20204172001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/states/rpminfo_state/oval:com.redhat.rhsa:ste:20224896001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20204172002.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20224896001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172003.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhvh-4/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20204172005.json"
+		]
+	}
+}

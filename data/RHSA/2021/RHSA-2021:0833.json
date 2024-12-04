@@ -1,0 +1,216 @@
+{
+	"id": "RHSA-2021:0833",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2021:0833",
+				"title": "RHSA-2021:0833: OpenShift Container Platform 3.11.404 security and bug fix update (Moderate)",
+				"description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 3.11.404. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHBA-2021:0832\n\nThis release fixes the following bugs:\n\n* Previously, node upgrade playbooks scoped all nodes instead of just the nodes that are filtered by the `openshift_upgrade_nodes_label`. As a result, nodes that were not intended to be upgraded had yum excluders disabled but not reenabled. With this release, the initialization of the variable for filtering nodes to upgrade is moved to earlier in the play, and  preconfiguration is scoped to the filtered list of nodes. As a result, only the nodes that are intended for upgrade have yum excluders disabled. (BZ#1917013)\n\n* Previously, node-based facts, such as `l_kubelet_node_name`, were set late in the upgrade cycle, causing the fact to be undefined when referenced. With this release, node-based fact initialization happens earlier in the upgrade cycle so that facts are set prior to being referenced. (BZ#1933090)\n\n* Previously, a bug fix in Ansible 2.9.10 changed the behavior of `delegate_to` for plays using `connection: local` with `hosts: localhost`. This change caused tasks that are intended for remote hosts to be executed locally. With this release, `connection: local` is removed for the affected play, and tasks intended for remote hosts are executed on the remote host.  (BZ#1934136)\n\nSecurity Fix(es):\n\n* golang-github-gorilla-websocket: integer overflow leads to denial of service (CVE-2020-27813)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2021:0833"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-27813"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1902111"
+					}
+				],
+				"published": "2021-03-25T00:00:00Z",
+				"modified": "2021-03-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2020-27813",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+							"base_score": 7.5,
+							"base_severity": "HIGH",
+							"temporal_score": 7.5,
+							"temporal_severity": "HIGH",
+							"environmental_score": 7.5,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-190->CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2020-27813"
+					}
+				],
+				"published": "2019-08-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "atomic-openshift-cluster-autoscaler",
+										"architectures": [
+											"ppc64le",
+											"x86_64"
+										],
+										"repositories": [
+											"rhel-7-for-power-9-ose-3.11-debug-rpms",
+											"rhel-7-for-power-9-ose-3.11-rpms",
+											"rhel-7-for-power-9-ose-3.11-source-rpms",
+											"rhel-7-for-power-le-ose-3.11-debug-rpms",
+											"rhel-7-for-power-le-ose-3.11-rpms",
+											"rhel-7-for-power-le-ose-3.11-source-rpms",
+											"rhel-7-server-ose-3.11-debug-rpms",
+											"rhel-7-server-ose-3.11-rpms",
+											"rhel-7-server-ose-3.11-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:3.11.404-1.git.0.2c258fe.el7"
+											}
+										],
+										"fixed": [
+											"0:3.11.404-1.git.0.2c258fe.el7"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "openshift-3.11"
+				},
+				{
+					"criteria": {
+						"operator": "AND",
+						"criterions": [
+							{
+								"type": "version",
+								"version": {
+									"vulnerable": true,
+									"fix_status": {
+										"class": "fixed"
+									},
+									"package": {
+										"name": "atomic-openshift-cluster-autoscaler",
+										"architectures": [
+											"ppc64le",
+											"x86_64"
+										],
+										"repositories": [
+											"rhel-7-for-power-9-ose-3.11-debug-rpms",
+											"rhel-7-for-power-9-ose-3.11-rpms",
+											"rhel-7-for-power-9-ose-3.11-source-rpms",
+											"rhel-7-for-power-le-ose-3.11-debug-rpms",
+											"rhel-7-for-power-le-ose-3.11-rpms",
+											"rhel-7-for-power-le-ose-3.11-source-rpms",
+											"rhel-7-server-ose-3.11-debug-rpms",
+											"rhel-7-server-ose-3.11-rpms",
+											"rhel-7-server-ose-3.11-source-rpms"
+										]
+									},
+									"affected": {
+										"type": "rpm",
+										"range": [
+											{
+												"lt": "0:3.11.404-1.git.0.2c258fe.el7"
+											}
+										],
+										"fixed": [
+											"0:3.11.404-1.git.0.2c258fe.el7"
+										]
+									}
+								}
+							}
+						]
+					},
+					"tag": "openshift-3.11-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/definitions/oval:com.redhat.rhsa:def:20210833.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201916276050.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20210833001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201916276100.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20210833001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20130169006.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/definitions/oval:com.redhat.rhsa:def:20210833.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/objects/rpminfo_object/oval:com.redhat.rhba:obj:20183743016.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/states/rpminfo_state/oval:com.redhat.rhsa:ste:20210833001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhba:tst:20183743032.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20210833001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652027.json",
+			"vuls-data-raw-redhat-ovalv2/7/openshift-3.11/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20182652028.json"
+		]
+	}
+}

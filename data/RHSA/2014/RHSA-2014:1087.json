@@ -1,0 +1,4590 @@
+{
+	"id": "RHSA-2014:1087",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2014:1087",
+				"title": "RHSA-2014:1087: Red Hat JBoss Web Server 2.1.0 update (Important)",
+				"description": "Red Hat JBoss Web Server is a fully integrated and certified set of\ncomponents for hosting Java web applications. It is comprised of the Apache\nHTTP Server, the Apache Tomcat Servlet container, Apache Tomcat Connector\n(mod_jk), JBoss HTTP Connector (mod_cluster), Hibernate, and the Tomcat\nNative library.\n\nThis release serves as a replacement for Red Hat JBoss Web Server 2.0.1,\nand includes several bug fixes. Refer to the Red Hat JBoss Web Server 2.1.0\nRelease Notes, linked to in the References section, for information on the\nmost significant of these changes.\n\nThe following security issues are also fixed with this release:\n\nA race condition flaw, leading to heap-based buffer overflows, was found in\nthe mod_status httpd module. A remote attacker able to access a status page\nserved by mod_status on a server using a threaded Multi-Processing Module\n(MPM) could send a specially crafted request that would cause the httpd\nchild process to crash or, possibly, allow the attacker to execute\narbitrary code with the privileges of the \"apache\" user. (CVE-2014-0226)\n\nA denial of service flaw was found in the way httpd's mod_deflate module\nhandled request body decompression (configured via the \"DEFLATE\" input\nfilter). A remote attacker able to send a request whose body would be\ndecompressed could use this flaw to consume an excessive amount of system\nmemory and CPU on the target system. (CVE-2014-0118)\n\nA denial of service flaw was found in the way httpd's mod_cgid module\nexecuted CGI scripts that did not read data from the standard input.\nA remote attacker could submit a specially crafted request that would cause\nthe httpd child process to hang indefinitely. (CVE-2014-0231)\n\nIt was found that several application-provided XML files, such as web.xml,\ncontent.xml, *.tld, *.tagx, and *.jspx, resolved external entities,\npermitting XML External Entity (XXE) attacks. An attacker able to deploy\nmalicious applications to Tomcat could use this flaw to circumvent security\nrestrictions set by the JSM, and gain access to sensitive information on\nthe system. Note that this flaw only affected deployments in which Tomcat\nis running applications from untrusted sources, such as in a shared hosting\nenvironment. (CVE-2013-4590)\n\nIt was found that, in certain circumstances, it was possible for a\nmalicious web application to replace the XML parsers used by Tomcat to\nprocess XSLTs for the default servlet, JSP documents, tag library\ndescriptors (TLDs), and tag plug-in configuration files. The injected XML\nparser(s) could then bypass the limits imposed on XML external entities\nand/or gain access to the XML files processed for other web applications\ndeployed on the same Tomcat instance. (CVE-2014-0119)\n\nAll users of Red Hat JBoss Web Server 2.0.1 on Red Hat Enterprise Linux 6\nare advised to upgrade to Red Hat JBoss Web Server 2.1.0. The JBoss server\nprocess must be restarted for this update to take effect.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2014:1087"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-4590"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0118"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0119"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0226"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0227"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0231"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1069911"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1102038"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1109196"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1120596"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1120601"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1120603"
+					}
+				],
+				"published": "2014-08-21T00:00:00Z",
+				"modified": "2014-08-21T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2013-4590",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:L/AC:H/Au:N/C:P/I:N/A:N",
+							"base_score": 1.2,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 1.2,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 1.2,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-611"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2013-4590"
+					}
+				],
+				"published": "2014-02-25T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-0118",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0118"
+					}
+				],
+				"published": "2014-07-17T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-0119",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:H/Au:S/C:P/I:N/A:N",
+							"base_score": 2.1,
+							"nvd_base_severity": "LOW",
+							"temporal_score": 2.1,
+							"nvd_temporal_severity": "LOW",
+							"environmental_score": 2.1,
+							"nvd_environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-470"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0119"
+					}
+				],
+				"published": "2014-05-27T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-0226",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+							"base_score": 6.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 6.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 6.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-662->CWE-122"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0226"
+					}
+				],
+				"published": "2014-07-17T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-0227",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-400"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0227"
+					}
+				],
+				"published": "2015-02-09T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2014-0231",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+							"base_score": 5,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2014-0231"
+					}
+				],
+				"published": "2014-07-17T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "antlr-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.7.7-17.redhat_4.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.7.7-17.redhat_4.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-collections-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.2.1-15.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.2.1-15.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-collections-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.2.1-15.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.2.1-15.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-daemon-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.15-5.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.15-5.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-daemon-jsvc-eap6",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.15-6.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.15-6.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-logging-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.1-7.9_redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.1-7.9_redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-logging-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.1-7.9_redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.1-7.9_redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-pool-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6-7.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6-7.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-pool-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6-7.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6-7.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "dom4j-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-20.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-20.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ecj3",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.7.2-9.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:3.7.2-9.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-c3p0-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-core-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-entitymanager-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-envers-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-infinispan-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-devel",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-tools",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "javassist-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.18.1-1.GA_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.18.1-1.GA_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-logging",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.1.4-1.GA_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.1.4-1.GA_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-transaction-api_1.1_spec",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1-12.Final_redhat_2.2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.0.1-12.Final_redhat_2.2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-3.Final_redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-3.Final_redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-tomcat6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-tomcat7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-ap22",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_rt",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-6.GA.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-6.GA.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_snmp",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-13.GA.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-13.GA.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_ssl",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "storeconfig-tc6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.1-7.Alpha3_redhat_12.3.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:0.0.1-7.Alpha3_redhat_12.3.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "storeconfig-tc7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.1-7.Alpha3_redhat_12.5.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:0.0.1-7.Alpha3_redhat_12.5.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.30-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.30-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-admin-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-docs-webapp",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-el-2.1-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-javadoc",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-jsp-2.1-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-lib",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-log4j",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-servlet-2.5-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-admin-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-docs-webapp",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-el-2.2-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-javadoc",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-jsp-2.2-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-lib",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-log4j",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-servlet-3.0-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-ws-2"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "antlr-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.7.7-17.redhat_4.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.7.7-17.redhat_4.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-collections-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.2.1-15.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.2.1-15.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-collections-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.2.1-15.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.2.1-15.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-daemon-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.15-5.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.15-5.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-daemon-jsvc-eap6",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:1.0.15-6.redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:1.0.15-6.redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-logging-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.1-7.9_redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.1-7.9_redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-logging-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.1-7.9_redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.1-7.9_redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-pool-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6-7.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6-7.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "apache-commons-pool-tomcat-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6-7.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6-7.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "dom4j-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.6.1-20.redhat_6.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.6.1-20.redhat_6.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "ecj3",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:3.7.2-9.redhat_3.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:3.7.2-9.redhat_3.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-c3p0-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-core-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-entitymanager-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-envers-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "hibernate4-infinispan-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:4.2.14-3.SP1_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-devel",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "httpd-tools",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "javassist-eap6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.18.1-1.GA_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.18.1-1.GA_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-logging",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:3.1.4-1.GA_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:3.1.4-1.GA_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "jboss-transaction-api_1.1_spec",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1-12.Final_redhat_2.2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.0.1-12.Final_redhat_2.2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-3.Final_redhat_2.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-3.Final_redhat_2.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-tomcat6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_cluster-tomcat7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.9-1.Final_redhat_1.1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-ap22",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_jk-manual",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.2.40-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.2.40-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_rt",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-6.GA.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-6.GA.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_snmp",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.4.1-13.GA.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:2.4.1-13.GA.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "mod_ssl",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "1:2.2.26-35.ep6.el6"
+													}
+												],
+												"fixed": [
+													"1:2.2.26-35.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "storeconfig-tc6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.1-7.Alpha3_redhat_12.3.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:0.0.1-7.Alpha3_redhat_12.3.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "storeconfig-tc7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.0.1-7.Alpha3_redhat_12.5.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:0.0.1-7.Alpha3_redhat_12.5.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat-native",
+												"architectures": [
+													"i386",
+													"x86_64"
+												],
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.1.30-2.redhat_1.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:1.1.30-2.redhat_1.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-admin-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-docs-webapp",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-el-2.1-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-javadoc",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-jsp-2.1-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-lib",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-log4j",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-servlet-2.5-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat6-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:6.0.41-5_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:6.0.41-5_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-admin-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-docs-webapp",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-el-2.2-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-javadoc",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-jsp-2.2-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-lib",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-log4j",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-servlet-3.0-api",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "tomcat7-webapps",
+												"repositories": [
+													"jb-ews-2-for-rhel-6-server-debug-rpms",
+													"jb-ews-2-for-rhel-6-server-rpms",
+													"jb-ews-2-for-rhel-6-server-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:7.0.54-6_patch_02.ep6.el6"
+													}
+												],
+												"fixed": [
+													"0:7.0.54-6_patch_02.ep6.el6"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "jboss-ws-2-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/definitions/oval:com.redhat.rhsa:def:20141087.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20010131001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20010131002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20010131003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20010131004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20010131007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20155345012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20160762022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20164459002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20164459003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20164459004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20166808001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20166808003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201715698002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087044.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087046.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087050.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20010131002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20010131004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20010131006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20010131008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20010131014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20155345024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20160762044.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20164459004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20164459006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20164459008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20166808002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20166808006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201715698004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087066.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087073.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087075.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087077.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087079.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087081.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087083.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087085.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087087.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087088.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087089.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087090.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087091.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087092.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087093.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087094.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087095.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087096.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087097.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087098.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087099.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087100.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087101.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087103.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087105.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087107.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087109.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087111.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087112.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20010131017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20010131018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/definitions/oval:com.redhat.rhsa:def:20141087.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhba:obj:20160090011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20130005010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20131012019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20140525004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087044.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087046.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087048.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087050.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20141087056.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/states/rpminfo_state/oval:com.redhat.rhsa:ste:20141087025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhba:tst:20160090022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20130005020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012002.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012004.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012006.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012020.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012022.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012024.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012026.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012036.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20131012038.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20140525008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087001.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087003.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087005.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087007.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087008.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087009.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087010.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087011.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087012.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087013.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087014.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087015.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087016.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087017.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087018.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087019.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087021.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087025.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087027.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087028.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087029.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087030.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087031.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087032.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087033.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087034.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087035.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087037.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087039.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087041.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087043.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087045.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087047.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087049.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087051.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087053.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087055.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087057.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087059.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087061.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087063.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087065.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087066.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087067.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087069.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087071.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087073.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087075.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087077.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087079.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087081.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087083.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087085.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087087.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087088.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087089.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087090.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087091.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087092.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087093.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087094.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087095.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087096.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087097.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087098.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087099.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087100.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087101.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087103.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087105.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087107.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087109.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087111.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20141087112.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20160090023.json",
+			"vuls-data-raw-redhat-ovalv2/6/jboss-ws-2/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20160090024.json"
+		]
+	}
+}

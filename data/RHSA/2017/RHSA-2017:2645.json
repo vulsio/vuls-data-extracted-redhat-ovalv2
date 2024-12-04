@@ -1,0 +1,923 @@
+{
+	"id": "RHSA-2017:2645",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2017:2645",
+				"title": "RHSA-2017:2645: satellite and spacewalk security and bug fix update (Moderate)",
+				"description": "Spacewalk is an Open Source systems management solution that provides system provisioning, configuration and patching capabilities.\n\nRed Hat Satellite is a system management tool for Linux-based infrastructures. It allows for provisioning, monitoring, and the remote management of multiple Linux deployments with a single, centralized tool.\n\nSecurity Fix(es):\n\n* A cross-site scripting (XSS) flaw was found in how an organization name is displayed in Satellite 5. A user able to change an organization's name could exploit this flaw to perform XSS attacks against other Satellite users. (CVE-2017-7538)\n\nThis issue was discovered by Ales Dujicek (Red Hat).\n\nBug Fix(es):\n\n* Prior to this update, transferring content between Satellites using Inter-Satellite Synchronization or channel-dumps failed to transfer the product-name related to channels. This interfered with the process of moving a server between EUS channels. The 'satellite-export' tool now correctly provides associated product-names, fixing this behavior. (BZ#1446271)\n\n* Prior to this update, the API call 'schedule.failSystemAction()' allowed overwriting a system's event history. This is undesirable from an auditing standpoint. The API now no longer allows affecting completed or failed events. (BZ#1455887)\n\n* Prior to this update, organization administrators who were not allowed to change their organization's attributes could do so by modifying form elements. The associated form controller no longer allows this behavior. (BZ#1458722)\n\n* Prior to this update, the 'download' tool's retry limit would be incorrect if there were more available mirrors than its retry count. It could also produce a harmless but unhelpful traceback in some situations. Both of these behaviors have been fixed. (BZ#1458765)\n\n* Prior to this update, it was possible for parallel registrations using reactivation keys, that were creating snapshot entries, to occasionally deadlock. Both the reactivation-key registration and snapshot-creation paths have been updated to prevent these deadlocks. (BZ#1458880)\n\n* Prior to this update, if there was some problem with a single erratum in a given repository, the 'reposync' command would complain and exit. The tool now logs such errors but continues to synchronize any remaining errata. (BZ#1466229)\n\n* The Satellite 5.8 release failed to include an update to a registration-failure error message that had been released for Satellite 5.7. This restores the missing update. (BZ#1467632)\n\n* Prior to this update, the list of systems in the System Set Manager failed to display the correct icons for a system's update status. This has been corrected. (BZ#1475067)\n\n* Prior to this update, a timing window in the 'cdn-sync' command, when synchronizing multiple channels at once, could cause some of the synchronization attempts to be refused with a 403 error. This update fixes the timing window so that multiple syncs should now work reliably. (BZ#1476924)\n\n* Prior to this update, attempting to view the systems in the System Set Manager that are affected by a given erratum would result in an internal server error. This has been fixed. (BZ#1477508)\n\n* Prior to this update, using 'cdn-sync --no-packages' on a specific channel would disassociate all packages from that channel. This behavior has been fixed, so that '--no-packages' now just skips that step as intended. (BZ#1477667)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2017:2645"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7538"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1471262"
+					}
+				],
+				"published": "2017-09-06T00:00:00Z",
+				"modified": "2017-09-06T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "satellite-5.8"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2017-7538",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:L/A:N",
+							"base_score": 3.5,
+							"base_severity": "LOW",
+							"temporal_score": 3.5,
+							"temporal_severity": "LOW",
+							"environmental_score": 3.5,
+							"environmental_severity": "LOW"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-79"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2017-7538"
+					}
+				],
+				"published": "2017-07-14T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "satellite-5.8"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "satellite-schema"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:5.8.0.33-1.el6sat"
+													}
+												],
+												"fixed": [
+													"0:5.8.0.33-1.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-app"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-applet"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-cdn"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-config-files"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-config-files-common"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-config-files-tool"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-iss"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-iss-export"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-libs"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-package-push-server"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-server"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-sql"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-sql-oracle"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-sql-postgresql"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-tools"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-xml-export-libs"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-backend-xmlrpc"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.3-151.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.3-151.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-java"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-java-config"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-java-lib"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-java-oracle"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-java-postgresql"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-schema"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.1-50.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.1-50.el6sat"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "spacewalk-taskomatic"
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.5.14-95.el6sat"
+													}
+												],
+												"fixed": [
+													"0:2.5.14-95.el6sat"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "satellite-5.8"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/definitions/oval:com.redhat.rhsa:def:20172645.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558107.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558115.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558116.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558117.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558118.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558119.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558120.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558122.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558124.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558125.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558126.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558127.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558128.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558129.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558130.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558131.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558132.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558133.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558134.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558135.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558136.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558137.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558138.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558139.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558140.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171558141.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172645001.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172645003.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172645004.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20172645005.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558214.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558230.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558232.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558234.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558236.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558238.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558240.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558244.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558248.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558250.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558252.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558254.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558256.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558258.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558260.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558262.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558264.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558266.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558268.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558270.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558272.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558274.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558276.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558278.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558280.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171558282.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645001.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645003.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645005.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645007.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645009.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645011.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645013.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645015.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645017.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645019.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645021.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645023.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645025.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645027.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645029.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645031.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645033.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645035.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645037.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645039.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645041.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645043.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645045.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645047.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645049.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172645051.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20171558309.json",
+			"vuls-data-raw-redhat-ovalv2/6/satellite-5.8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20171558464.json"
+		]
+	}
+}

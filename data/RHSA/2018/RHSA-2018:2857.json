@@ -1,0 +1,434 @@
+{
+	"id": "RHSA-2018:2857",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2018:2857",
+				"title": "RHSA-2018:2857: Red Hat OpenStack Platform 8 director security and bug fix update (Moderate)",
+				"description": "memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.\n\ninstack-undercloud provides a collection of scripts and elements that can be used to install an OpenStack undercloud (using python-instack).\n\nopenstack-tripleo-heat-templates is a collection of OpenStack Orchestration templates and tools (codename heat), which can be used to help deploy OpenStack.\n\nSecurity Fix(es):\n\n* memcached: UDP server support allows spoofed traffic amplification DoS (CVE-2018-1000115)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* This update fixes a race condition that could cause pacemaker-managed glance-fs deployments to fail.\n\nNow the glance-fs resource is created from a single node of the overcloud in a way that eliminates the race condition and the resultant deployment failures. (BZ#1418617)\n\n* Prior to this update, the source IP address for cold migration and resize was determined by the default gateway configured on the source compute node. \n\nNow the my_ip option is explicitly set to the internal_api network IP in nova.conf, ensuring the correct network is used for this traffic. (BZ#1552855)",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Moderate"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2018:2857"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-1000115"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1551182"
+					}
+				],
+				"published": "2018-10-02T00:00:00Z",
+				"modified": "2018-10-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2018-1000115",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v30",
+						"source": "secalert@redhat.com",
+						"cvss_v30": {
+							"vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+							"base_score": 5.3,
+							"base_severity": "MEDIUM",
+							"temporal_score": 5.3,
+							"temporal_severity": "MEDIUM",
+							"environmental_score": 5.3,
+							"environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2018-1000115"
+					}
+				],
+				"published": "2018-03-02T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8"
+				},
+				{
+					"ecosystem": "redhat:7",
+					"tag": "openstack-8-including-unpatched"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:7",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "instack-undercloud",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.7-13.el7ost"
+													}
+												],
+												"fixed": [
+													"0:2.2.7-13.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.14-42.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.14-42.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates-kilo",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.14-42.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.14-42.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-8"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "instack-undercloud",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:2.2.7-13.el7ost"
+													}
+												],
+												"fixed": [
+													"0:2.2.7-13.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.14-42.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.14-42.el7ost"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openstack-tripleo-heat-templates-kilo",
+												"repositories": [
+													"rhel-7-desktop-openstack-8-tools-debug-rpms",
+													"rhel-7-desktop-openstack-8-tools-rpms",
+													"rhel-7-desktop-openstack-8-tools-source-rpms",
+													"rhel-7-server-openstack-8-debug-rpms",
+													"rhel-7-server-openstack-8-director-debug-rpms",
+													"rhel-7-server-openstack-8-director-rpms",
+													"rhel-7-server-openstack-8-director-source-rpms",
+													"rhel-7-server-openstack-8-optools-debug-rpms",
+													"rhel-7-server-openstack-8-optools-rpms",
+													"rhel-7-server-openstack-8-optools-source-rpms",
+													"rhel-7-server-openstack-8-rpms",
+													"rhel-7-server-openstack-8-source-rpms",
+													"rhel-7-server-openstack-8-tools-debug-rpms",
+													"rhel-7-server-openstack-8-tools-rpms",
+													"rhel-7-server-openstack-8-tools-source-rpms",
+													"rhel-7-workstation-openstack-8-tools-debug-rpms",
+													"rhel-7-workstation-openstack-8-tools-rpms",
+													"rhel-7-workstation-openstack-8-tools-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:0.8.14-42.el7ost"
+													}
+												],
+												"fixed": [
+													"0:0.8.14-42.el7ost"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "openstack-8-including-unpatched"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/definitions/oval:com.redhat.rhsa:def:20182857.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201712155001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:201712155002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172687001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182857001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182857003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201712155002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:201712155004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172687002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20137458004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/definitions/oval:com.redhat.rhsa:def:20182857.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171546001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20171546002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20172687001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182857001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/states/rpminfo_state/oval:com.redhat.rhsa:ste:20182857003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171546002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20171546004.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20172687002.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857001.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857003.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20182857005.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161002013.json",
+			"vuls-data-raw-redhat-ovalv2/7/openstack-8/tests/rpmverifyfile_test/oval:com.redhat.rhsa:tst:20161002014.json"
+		]
+	}
+}

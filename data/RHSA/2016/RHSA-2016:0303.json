@@ -1,0 +1,931 @@
+{
+	"id": "RHSA-2016:0303",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2016:0303",
+				"title": "RHSA-2016:0303: openssl security update (Important)",
+				"description": "OpenSSL is a toolkit that implements the Secure Sockets Layer (SSL v2/v3)\nand Transport Layer Security (TLS v1) protocols, as well as a\nfull-strength, general purpose cryptography library.\n\nA padding oracle flaw was found in the Secure Sockets Layer version 2.0\n(SSLv2) protocol. An attacker can potentially use this flaw to decrypt\nRSA-encrypted cipher text from a connection using a newer SSL/TLS protocol\nversion, allowing them to decrypt such connections. This cross-protocol\nattack is publicly referred to as DROWN. (CVE-2016-0800)\n\nNote: This issue was addressed by disabling the SSLv2 protocol by default\nwhen using the 'SSLv23' connection methods, and removing support for weak\nSSLv2 cipher suites. For more information, refer to the knowledge base\narticle linked to in the References section.\n\nIt was discovered that the SSLv2 servers using OpenSSL accepted SSLv2\nconnection handshakes that indicated non-zero clear key length for\nnon-export cipher suites. An attacker could use this flaw to decrypt\nrecorded SSLv2 sessions with the server by using it as a decryption \noracle.(CVE-2016-0703)\n\nIt was discovered that the SSLv2 protocol implementation in OpenSSL did \nnot properly implement the Bleichenbacher protection for export cipher \nsuites. An attacker could use a SSLv2 server using OpenSSL as a \nBleichenbacher oracle. (CVE-2016-0704)\n\nNote: The CVE-2016-0703 and CVE-2016-0704 issues could allow for more\nefficient exploitation of the CVE-2016-0800 issue via the DROWN attack.\n\nA denial of service flaw was found in the way OpenSSL handled SSLv2\nhandshake messages. A remote attacker could use this flaw to cause a\nTLS/SSL server using OpenSSL to exit on a failed assertion if it had both\nthe SSLv2 protocol and EXPORT-grade cipher suites enabled. (CVE-2015-0293)\n\nA flaw was found in the way malicious SSLv2 clients could negotiate SSLv2\nciphers that have been disabled on the server. This could result in weak\nSSLv2 ciphers being used for SSLv2 connections, making them vulnerable to\nman-in-the-middle attacks. (CVE-2015-3197)\n\nRed Hat would like to thank the OpenSSL project for reporting these issues.\nUpstream acknowledges Nimrod Aviram and Sebastian Schinzel as the original\nreporters of CVE-2016-0800 and CVE-2015-3197; David Adrian (University of\nMichigan) and J. Alex Halderman (University of Michigan) as the original\nreporters of CVE-2016-0703 and CVE-2016-0704; and Sean Burford (Google) and\nEmilia Käsper (OpenSSL development team) as the original reporters of\nCVE-2015-0293.\n\nAll openssl users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. For the update to take\neffect, all services linked to the OpenSSL library must be restarted, or\nthe system rebooted.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2016:0303"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0293"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-3197"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0703"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0704"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0800"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1202404"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1301846"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1310593"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1310811"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/1310814"
+					}
+				],
+				"published": "2016-03-01T00:00:00Z",
+				"modified": "2016-03-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		}
+	],
+	"vulnerabilities": [
+		{
+			"content": {
+				"id": "CVE-2015-0293",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:N/I:N/A:P",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-617"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-0293"
+					}
+				],
+				"published": "2015-03-19T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2015-3197",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "low"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+							"base_score": 5.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2015-3197"
+					}
+				],
+				"published": "2016-01-28T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-0703",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0703"
+					}
+				],
+				"published": "2016-03-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-0704",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "moderate"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:N/A:N",
+							"base_score": 4.3,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 4.3,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 4.3,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0704"
+					}
+				],
+				"published": "2016-03-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2016-0800",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v2",
+						"source": "secalert@redhat.com",
+						"cvss_v2": {
+							"vector": "AV:N/AC:M/Au:N/C:P/I:P/A:N",
+							"base_score": 5.8,
+							"nvd_base_severity": "MEDIUM",
+							"temporal_score": 5.8,
+							"nvd_temporal_severity": "MEDIUM",
+							"environmental_score": 5.8,
+							"nvd_environmental_severity": "MEDIUM"
+						}
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2016-0800"
+					}
+				],
+				"published": "2016-03-01T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.4-aus"
+				},
+				{
+					"ecosystem": "redhat:6",
+					"tag": "rhel-6.5-aus"
+				}
+			]
+		}
+	],
+	"detections": [
+		{
+			"ecosystem": "redhat:6",
+			"conditions": [
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-20.el6_2.8"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-20.el6_2.8"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-20.el6_2.8"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-20.el6_2.8"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-perl",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-20.el6_2.8"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-20.el6_2.8"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-static",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-source-rpms"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-20.el6_2.8"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-20.el6_2.8"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.2-aus"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1e-16.el6_5.16"
+													}
+												],
+												"fixed": [
+													"0:1.0.1e-16.el6_5.16"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1e-16.el6_5.16"
+													}
+												],
+												"fixed": [
+													"0:1.0.1e-16.el6_5.16"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-perl",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1e-16.el6_5.16"
+													}
+												],
+												"fixed": [
+													"0:1.0.1e-16.el6_5.16"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-static",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_5__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_5__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.1e-16.el6_5.16"
+													}
+												],
+												"fixed": [
+													"0:1.0.1e-16.el6_5.16"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.5-aus"
+				},
+				{
+					"criteria": {
+						"operator": "OR",
+						"criterias": [
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_4__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-27.el6_4.5"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-27.el6_4.5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-devel",
+												"architectures": [
+													"i686",
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_4__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-27.el6_4.5"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-27.el6_4.5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-perl",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_4__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-27.el6_4.5"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-27.el6_4.5"
+												]
+											}
+										}
+									}
+								]
+							},
+							{
+								"operator": "AND",
+								"criterions": [
+									{
+										"type": "version",
+										"version": {
+											"vulnerable": true,
+											"fix_status": {
+												"class": "fixed"
+											},
+											"package": {
+												"name": "openssl-static",
+												"architectures": [
+													"x86_64"
+												],
+												"repositories": [
+													"rhel-6-server-aus-debug-rpms",
+													"rhel-6-server-aus-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-debug-rpms",
+													"rhel-6-server-aus-optional-debug-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-rpms",
+													"rhel-6-server-aus-optional-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-optional-source-rpms",
+													"rhel-6-server-aus-optional-source-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-rpms",
+													"rhel-6-server-aus-rpms__6_DOT_4__x86_64",
+													"rhel-6-server-aus-source-rpms",
+													"rhel-6-server-aus-source-rpms__6_DOT_4__x86_64"
+												]
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.0.0-27.el6_4.5"
+													}
+												],
+												"fixed": [
+													"0:1.0.0-27.el6_4.5"
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					},
+					"tag": "rhel-6.4-aus"
+				}
+			]
+		}
+	],
+	"data_source": {
+		"id": "redhat-ovalv2",
+		"raws": [
+			"vuls-data-raw-redhat-oval-repository-to-cpe/repository-to-cpe.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/definitions/oval:com.redhat.rhsa:def:20160303.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.2-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/definitions/oval:com.redhat.rhsa:def:20160303.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.4-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/definitions/oval:com.redhat.rhsa:def:20160303.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/objects/rpminfo_object/oval:com.redhat.rhsa:obj:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/states/rpminfo_state/oval:com.redhat.rhsa:ste:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888002.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888004.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888006.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20100888008.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303001.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303005.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpminfo_test/oval:com.redhat.rhsa:tst:20160303007.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656003.json",
+			"vuls-data-raw-redhat-ovalv2/6/rhel-6.5-aus/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20111656004.json"
+		]
+	}
+}

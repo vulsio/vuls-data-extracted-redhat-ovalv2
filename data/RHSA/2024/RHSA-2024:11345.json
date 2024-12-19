@@ -1,11 +1,63 @@
 {
-	"id": "CVE-2024-47538",
+	"id": "RHSA-2024:11345",
+	"advisories": [
+		{
+			"content": {
+				"id": "RHSA-2024:11345",
+				"title": "RHSA-2024:11345: gstreamer1-plugins-base security update (Important)",
+				"description": "GStreamer is a streaming media framework based on graphs of filters which operate on media data. The gstreamer1-plugins-base packages contain a collection of well-maintained base plug-ins.\n\nSecurity Fix(es):\n\n* gstreamer1-plugins-base: GStreamer has a stack-buffer overflow in vorbis_handle_identification_packet (CVE-2024-47538)\n\n* gstreamer1-plugins-base: out-of-bounds write in Ogg demuxer (CVE-2024-47615)\n\n* gstreamer1-plugins-base: stack-buffer overflow in gst_opus_dec_parse_header (CVE-2024-47607)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "Important"
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/errata/RHSA-2024:11345"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2024-47538"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2024-47607"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2024-47615"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2331727"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2331740"
+					},
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://bugzilla.redhat.com/2331754"
+					}
+				],
+				"published": "2024-12-18T00:00:00Z",
+				"modified": "2024-12-18T00:00:00Z"
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhel-8-including-unpatched"
+				}
+			]
+		}
+	],
 	"vulnerabilities": [
 		{
 			"content": {
 				"id": "CVE-2024-47538",
-				"title": "gstreamer1-plugins-base: GStreamer has a stack-buffer overflow in vorbis_handle_identification_packet (important)",
-				"description": "DOCUMENTATION: The CVE program describes this issue as: GStreamer is a library for constructing graphs of media-handling components. A stack-buffer overflow has been detected in the vorbis_handle_identification_packet function within gstvorbisdec.c. The position array is a stack-allocated buffer of size 64. If vd->vi.channels exceeds 64, the for loop will write beyond the boundaries of the position array The value written will always be GST_AUDIO_CHANNEL_POSITION_NONE. This vulnerability allows to overwrite the EIP address allocated in the stack. Additionally, this bug can overwrite the GstAudioInfo info structure. This vulnerability is fixed in 1.24.10. \n            STATEMENT: To exploit this flaw, an attacker needs to trick a user into opening or processing a specially crafted .ogg file. However, this issue still has an important severity as it allows an attacker to trigger a stack-based buffer overflow and overwrite critical memory regions, including the return address of control data, potentially resulting in unexpected behavior, including arbitrary code execution.\n            MITIGATION: Do not process untrusted files with the Vorbis decoder and monitor application crashes as this may indicate exploitation attempts.",
 				"severity": [
 					{
 						"type": "vendor",
@@ -39,8 +91,97 @@
 						"source": "secalert@redhat.com",
 						"url": "https://access.redhat.com/security/cve/CVE-2024-47538"
 					}
+				]
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhel-8-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2024-47607",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.4,
+							"base_severity": "HIGH",
+							"temporal_score": 8.4,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.4,
+							"environmental_severity": "HIGH"
+						}
+					}
 				],
-				"modified": "2024-12-13T00:00:00Z"
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-121"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2024-47607"
+					}
+				]
+			},
+			"segments": [
+				{
+					"ecosystem": "redhat:8",
+					"tag": "rhel-8-including-unpatched"
+				}
+			]
+		},
+		{
+			"content": {
+				"id": "CVE-2024-47615",
+				"severity": [
+					{
+						"type": "vendor",
+						"source": "secalert@redhat.com",
+						"vendor": "important"
+					},
+					{
+						"type": "cvss_v31",
+						"source": "secalert@redhat.com",
+						"cvss_v31": {
+							"vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+							"base_score": 8.4,
+							"base_severity": "HIGH",
+							"temporal_score": 8.4,
+							"temporal_severity": "HIGH",
+							"environmental_score": 8.4,
+							"environmental_severity": "HIGH"
+						}
+					}
+				],
+				"cwe": [
+					{
+						"source": "secalert@redhat.com",
+						"cwe": [
+							"CWE-787"
+						]
+					}
+				],
+				"references": [
+					{
+						"source": "secalert@redhat.com",
+						"url": "https://access.redhat.com/security/cve/CVE-2024-47615"
+					}
+				]
 			},
 			"segments": [
 				{
@@ -66,13 +207,19 @@
 										"version": {
 											"vulnerable": true,
 											"fix_status": {
-												"class": "unfixed",
-												"vendor": "Affected"
+												"class": "fixed"
 											},
 											"package": {
 												"type": "binary",
 												"binary": {
 													"name": "gstreamer1-plugins-base",
+													"architectures": [
+														"aarch64",
+														"i686",
+														"ppc64le",
+														"s390x",
+														"x86_64"
+													],
 													"repositories": [
 														"codeready-builder-for-rhel-8-aarch64-debug-rpms",
 														"codeready-builder-for-rhel-8-aarch64-rpms",
@@ -196,6 +343,17 @@
 														"rhel-8-for-x86_64-supplementary-source-rpms"
 													]
 												}
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.16.1-5.el8_10"
+													}
+												],
+												"fixed": [
+													"0:1.16.1-5.el8_10"
+												]
 											}
 										}
 									}
@@ -209,13 +367,19 @@
 										"version": {
 											"vulnerable": true,
 											"fix_status": {
-												"class": "unfixed",
-												"vendor": "Affected"
+												"class": "fixed"
 											},
 											"package": {
 												"type": "binary",
 												"binary": {
 													"name": "gstreamer1-plugins-base-devel",
+													"architectures": [
+														"aarch64",
+														"i686",
+														"ppc64le",
+														"s390x",
+														"x86_64"
+													],
 													"repositories": [
 														"codeready-builder-for-rhel-8-aarch64-debug-rpms",
 														"codeready-builder-for-rhel-8-aarch64-rpms",
@@ -339,6 +503,17 @@
 														"rhel-8-for-x86_64-supplementary-source-rpms"
 													]
 												}
+											},
+											"affected": {
+												"type": "rpm",
+												"range": [
+													{
+														"lt": "0:1.16.1-5.el8_10"
+													}
+												],
+												"fixed": [
+													"0:1.16.1-5.el8_10"
+												]
 											}
 										}
 									}
@@ -354,15 +529,17 @@
 	"data_source": {
 		"id": "redhat-ovalv2",
 		"raws": [
-			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/definitions/oval:com.redhat.cve:def:202447538.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/definitions/oval:com.redhat.rhsa:def:202411345.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20199928001.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/objects/rpminfo_object/oval:com.redhat.cve:obj:20199928002.json",
-			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20199928001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/states/rpminfo_state/oval:com.redhat.rhsa:ste:202411299001.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20199928002.json",
-			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20199928003.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.cve:tst:20199928004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:202411345001.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpminfo_test/oval:com.redhat.rhsa:tst:202411345003.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20052541003.json",
 			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.cve:tst:20052541004.json",
+			"vuls-data-raw-redhat-ovalv2/8/rhel-8-including-unpatched/tests/rpmverifyfile_test/oval:com.redhat.rhba:tst:20191992004.json",
 			"vuls-data-raw-redhat-repository-to-cpe/repository-to-cpe.json"
 		]
 	}
